@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-zitate.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/zitatAbschicken.js"></script>
+    <script src="../javascript/zitatLöschen.js"></script>
+    <script src="../javascript/zitatFavorisieren.js"></script>
+    <script src="../javascript/zitateZurücksetzen.js"></script>
+    <script src="../javascript/zitateLaden.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../zitate";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+        if (getCookie("login") != "Admin") {
+            weiterleiten("../zitate");
+        }
+
+        function bodyReady() {
+            zitateLaden(getCookie("login"));
+            zeilenTabelleZählenUndDivAktualisieren("zitate-count", "zitate", true);
+
+
+        }
+
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR DARK  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-dark.js"></script>
+<script>loadNav(false, false);</script>
+
+
+<div style="height: 100px;"></div>
+
+<div class="main">
+
+    <div class="title">
+        <h1>Zitate Moderieren</h1>
+        <h2 style="cursor: pointer;" onclick="weiterleiten('../moderation')">Fertig</h2>
+    </div>
+
+    <h3 id="zitate-favs" style="display: none;">Zitate<span class="h3-light"> - Favorisiert</span></h3>
+
+    <div id="zitate-favoriten" class="zitate-container"></div>
+
+    <h3>Alle Zitate <span class="h3-light">(<span id="zitate-count">0</span>)</span></h3>
+
+    <div id="zitate-alle" class="zitate-container"></div>
+
+</div>
+
+<div style="height: 100px;"></div>
+
+<!--  ///////////////////  FOOTER DARK  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-dark.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

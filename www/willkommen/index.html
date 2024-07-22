@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abizeitungsapp</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../images/logo_1024x1024.png">
+    <link rel="apple-touch-startup-image" href="../images/ati_dark.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css-willkommen.css">
+    <script src="../javascript/weiterleiten.js"></script>
+
+
+    <script>
+
+    function bodyReady() {
+        document.getElementById("1").style.transition = "all 1.35s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 3s ease-in-out, transform 2s ease-out";
+
+        setTimeout(function() {
+            
+            document.getElementById("1").style.opacity = 1;
+            document.getElementById("1").style.transform = "scale(1)";
+
+            setTimeout(function() {
+                document.getElementById("1-1").style.opacity = 1;
+
+            }, 600);
+            setTimeout(function() {
+                document.getElementById("1-2").style.opacity = 1;
+
+            }, 1000);
+            setTimeout(function() {
+                document.getElementById("1-3").style.opacity = 1;
+                document.getElementById("1").style.transition = "all 1.35s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+            }, 1400);
+
+        }, 500);
+        
+    }
+
+    document.addEventListener('click', screenTouchHandler); // Für Mausklicks
+    document.addEventListener('touchstart', screenTouchHandler); // Für Berührungen auf Touchscreens
+
+    var slide = 0;
+    var clickable = false;
+
+    setTimeout(function() {
+            clickable = true;
+        }, 2000);
+
+    function screenTouchHandler(event) {
+
+        if (clickable) {
+            slide++;
+
+            if (slide == 1) {
+                slide1();
+            }
+            if (slide == 2) {
+                slide2();
+            }
+            if (slide == 3) {
+                slide3();
+            }
+        }
+        
+
+    }
+
+    function slide1() {
+
+        clickable = false;
+
+        document.getElementById("1").style.height = "0px";
+        document.getElementById("1").style.opacity = 0;
+        document.getElementById("1").style.paddingTop = "0px";
+        document.getElementById("1").style.paddingBottom = "0px";
+        document.getElementById("1").style.marginTop = "0px";
+        document.getElementById("1").style.marginBottom = "0px";
+
+        document.getElementById("1").style.transform = "scale(.5)";
+        document.getElementById("2").style.display = "block";
+
+        document.getElementById("d1").style.backgroundColor = "#ffffff58";
+        document.getElementById("d2").style.backgroundColor = "#ffffffaa";
+
+        setTimeout(function() {
+            document.getElementById("2").style.opacity = 1;
+        }, 20);
+
+        setTimeout(function() {
+            clickable = true;
+        }, 500);
+
+    }
+
+    function slide2() {
+
+        clickable = false;
+
+        document.getElementById("2").style.height = "0px";
+        document.getElementById("2").style.opacity = 0;
+        document.getElementById("2").style.paddingTop = "0px";
+        document.getElementById("2").style.paddingBottom = "0px";
+        document.getElementById("2").style.marginTop = "0px";
+        document.getElementById("2").style.marginBottom = "0px";
+
+        document.getElementById("2").style.transform = "scale(.5)";
+        document.getElementById("3").style.display = "block";
+
+        document.getElementById("d2").style.backgroundColor = "#ffffff58";
+        document.getElementById("d3").style.backgroundColor = "#ffffffaa";
+
+        setTimeout(function() {
+            document.getElementById("3").style.opacity = 1;
+        }, 20);
+
+        setTimeout(function() {
+            clickable = true;
+        }, 2000);
+
+        setTimeout(function() {
+
+            document.getElementById("3-1").style.opacity = 1;
+
+            var wait = 500;
+            setTimeout(function() { document.getElementById("3-2").style.opacity = .2; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-3").style.opacity = 1; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-4").style.opacity = 1; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-5").style.opacity = 1; }, wait); wait = wait + 400;
+            setTimeout(function() { document.getElementById("3-6").style.opacity = .2; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-7").style.opacity = 1; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-8").style.opacity = 1; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-9").style.opacity = 1; }, wait); wait = wait + 400;
+            setTimeout(function() { document.getElementById("3-10").style.opacity = .2; }, wait); wait = wait + 150;
+            setTimeout(function() { document.getElementById("3-11").style.opacity = .5; }, wait); wait = wait + 150;
+
+            
+
+        }, 1000);
+
+    }
+
+    function slide3() {
+
+        clickable = false;
+
+        document.getElementById("3").style.height = "0px";
+        document.getElementById("3").style.opacity = 0;
+        document.getElementById("3").style.paddingTop = "0px";
+        document.getElementById("3").style.paddingBottom = "0px";
+        document.getElementById("3").style.marginTop = "0px";
+        document.getElementById("3").style.marginBottom = "0px";
+
+        document.getElementById("3").style.transform = "scale(.5)";
+        document.getElementById("4").style.display = "block";
+
+        document.getElementById("d3").style.backgroundColor = "#ffffff58";
+        document.getElementById("d4").style.backgroundColor = "#ffffffaa";
+
+        setTimeout(function() {
+            document.getElementById("4").style.opacity = 1;
+        }, 20);
+
+        setTimeout(function() {
+            clickable = true;
+        }, 500);
+
+
+        
+    }
+
+    </script>
+</head>
+<body onload="bodyReady()">
+
+<div id="1" style="opacity: 0; transform: scale(0.7);" class="slide thumb-2">
+        <h3 id="1-1" style="opacity: 0;">ABI 2025</h3>
+        <h1 id="1-2" style="opacity: 0;">Abinauten</h1>
+        <h2 id="1-3" style="opacity: 0;">Keine Überflieger. Trotzdem abgehoben.</h2>
+</div>
+
+<div id="2" style="opacity: 0; display: none;" class="slide thumb-1">
+    <h1>Abizeitungsapp</h1>
+    <h2>Vom Abizeitungskomitee entwickelt.</h2>
+    <img src="../images/logo_1024x1024.png">
+</div>
+
+<div id="3" style="opacity: 0; display: none;" class="slide first">
+    <h2>Was kann man hier machen?</h2>
+    <ul>
+        <li id="3-1" style="opacity: 0;">Steckbriefe</li>
+
+        <hr id="3-2" style="opacity: 0;">
+        <li id="3-3" style="opacity: 0;">Zitate</li>
+        <li id="3-4" style="opacity: 0;">Beichten</li>
+        <li id="3-5" style="opacity: 0;">Storys</li>
+        <hr id="3-6" style="opacity: 0;">
+
+        <li id="3-7" style="opacity: 0;">Umfragen</li>
+        <li id="3-8" style="opacity: 0;">Rankings</li>
+        <li id="3-9" style="opacity: 0;">Abstimmungen</li>
+        <hr id="3-10" style="opacity: 0;">
+
+        <li style="opacity: 0;" id="3-11">Crush Count</li>
+
+    </ul>
+</div>
+
+<div id="4" style="opacity: 0; display: none;" class="slide first">
+    <h2>Gleich gehts los</h2>
+    <ul>
+        <li>Bei Fragen</li>
+        <li style="opacity: .5;">- Abizeitungskomitee</li>
+        <li style="opacity: .5;">- Timothy (Entwickler)</li>
+
+        <hr>
+        <br>
+        <button onclick="weiterleiten('../startseite')">Startseite</button>
+        <button onclick="weiterleiten('../anmelden')">Anmelden</button>
+
+
+    </ul>
+</div>
+
+
+<div class="slides-dots">
+    <div>
+        <div id="d1" class="selected"></div>
+        <div id="d2"></div>
+        <div id="d3"></div>
+        <div id="d4"></div>
+    </div>
+    
+</div>
+    
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-anmelden.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+        console.log(getCookie("login"));
+
+        function bodyReady() {
+            document.getElementById("name").innerHTML = getCookie("anzeigename");
+        }
+
+
+        function changePass() {
+            var login = getCookie("benutzername") + document.getElementById("inputOldPass").value;
+            var newPass = document.getElementById("inputNewPass").value;
+            var newPassConfirm = document.getElementById("inputNewPassConfirm").value;
+            var username = getCookie("benutzername");
+    
+            console.log(login);
+            console.log(newPass);
+            console.log(newPassConfirm);
+            console.log(username);
+
+            $.ajax({
+                type: "POST",
+                url: "../php/changePass.php", // Hier den Pfad zu deinem PHP-Skript angeben
+                data: { username: username, login: login, newPass: newPass, newPassConfirm: newPassConfirm },
+                success: function(response) {
+                    // Hier kannst du den Erfolg der Anfrage behandeln
+                    console.log(response);
+
+                    if (response == 0) {
+
+                        document.getElementById("error1").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Gib gültige Anmeldedaten an.</div>";
+                        document.getElementById("error2").innerHTML = "";
+
+                        document.getElementById("inputOldPass").style.borderColor = "rgb(227, 0, 0)";
+                        document.getElementById("inputOldPass").style.backgroundColor = "rgb(255, 242, 244)";
+                        document.getElementById("inputOldPassLabel").style.color = "rgb(227, 0, 0)";
+
+                        document.getElementById("inputNewPass").style.borderColor = "#C2C2C7";
+                        document.getElementById("inputNewPass").style.backgroundColor = "white";
+                        document.getElementById("inputNewPassLabel").style.color = "#C2C2C7";
+
+                        document.getElementById("inputNewPassConfirm").style.borderColor = "#C2C2C7";
+                        document.getElementById("inputNewPassConfirm").style.backgroundColor = "white";
+                        document.getElementById("inputNewPassConfirmLabel").style.color = "#C2C2C7";
+
+                    }
+                    if (response == -1 || response == -2 || response == -3 || response == -4) {
+
+                        document.getElementById("error1").innerHTML = "";
+
+                        if (response == -1 ) {
+                            document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Die neuen Passwörter stimmen nicht überein.</div>";
+                        }
+                        if (response == -2 ) {
+                            document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort ist zu kurz. (mind. 3 Zeichen)</div>";
+                        }
+                        if (response == -3 ) {
+                            document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort ist zu lang. (max. 50 Zeichen)</div>";
+                        }
+                        if (response == -4 ) {
+                            document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort enthält verbotene Zeichen. <br> (Nur Buchstaben (a-z, A-Z), Zahlen (0-9), Sonderzeichen (.,~!§$/()=ß?#+*-_@:<>^°)</div>";
+                        }
+
+                        document.getElementById("inputOldPass").style.borderColor = "#C2C2C7";
+                        document.getElementById("inputOldPass").style.backgroundColor = "white";
+                        document.getElementById("inputOldPassLabel").style.color = "#C2C2C7";
+
+                        document.getElementById("inputNewPass").style.borderColor = "rgb(227, 0, 0)";
+                        document.getElementById("inputNewPass").style.backgroundColor = "rgb(255, 242, 244)";
+                        document.getElementById("inputNewPassLabel").style.color = "rgb(227, 0, 0)";
+
+                        document.getElementById("inputNewPassConfirm").style.borderColor = "rgb(227, 0, 0)";
+                        document.getElementById("inputNewPassConfirm").style.backgroundColor = "rgb(255, 242, 244)";
+                        document.getElementById("inputNewPassConfirmLabel").style.color = "rgb(227, 0, 0)";
+
+                    }
+                    if (response == 1) {
+                        deleteCookie("login");
+                        deleteCookie("rolle");
+                        deleteCookie("anzeigename");
+                        deleteCookie("benutzername");
+                        deleteCookie("initialien");
+
+                        alert("Du hast erfolgreich dein Passwort aktualisiert. Du musst dich nun erneut anmelden.")
+                        
+                        weiterleiten("../anmelden");
+                    }
+                },
+                error: function(error) {
+                    // Hier kannst du Fehler bei der Anfrage behandeln
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+
+
+
+<div class="top-spacing-1"></div>
+
+<div class="main">
+
+    <div class="main-grid">
+        <div>
+            <h2>Passwort Ändern</h2>
+            <p>Ändere dein Passwort. Du bist als <span id="name"></span> angemeldet.</p>
+
+
+            <div style="margin-top: 64px;">
+                <label id="inputOldPassLabel">Derzeitiges Passwort</label>
+
+                <input id="inputOldPass" type="password" autocomplete="current-password" onfocus="labelAnimationFocus('inputOldPass','inputOldPassLabel')" onblur="labelAnimationFocusOut('inputOldPass','inputOldPassLabel')">
+            </div>
+
+            <div id="error1"></div>
+
+
+            <div style="margin-top: 50px;">  
+                <label id="inputNewPassLabel">Neues Passwort</label>
+
+                <input id="inputNewPass" type="password" autocomplete="new-password" onfocus="labelAnimationFocus('inputNewPass','inputNewPassLabel')" onblur="labelAnimationFocusOut('inputNewPass','inputNewPassLabel')">
+            </div>
+
+            <div style="margin-top: 15px;">  
+                <label id="inputNewPassConfirmLabel">Neues Passwort Bestätigen</label>
+
+                <input id="inputNewPassConfirm" type="password" autocomplete="new-password" onfocus="labelAnimationFocus('inputNewPassConfirm','inputNewPassConfirmLabel')" onblur="labelAnimationFocusOut('inputNewPassConfirm','inputNewPassConfirmLabel')">
+            </div>
+
+            <div id="error2"></div>
+
+            <button style="margin-top: 64px; border: 2px solid black; background-color: white; color: black;" onclick="weiterleiten('../konto')">Abbrechen</button>
+            <button style="margin-top: 25px;" onclick="changePass()">Passwort Ändern</button>
+
+            
+        </div>
+
+        <script>
+
+            function labelAnimationFocus(inputid,labelid) {
+
+                document.getElementById(labelid).style.marginTop = "10px";
+                document.getElementById(labelid).style.fontSize = "12px";
+            }
+
+            function labelAnimationFocusOut(inputid,labelid) {
+
+            if (document.getElementById(inputid).value == "") {
+                document.getElementById(labelid).style.marginTop = "18px";
+                document.getElementById(labelid).style.fontSize = "17px";
+            }
+            }
+
+
+        </script>
+
+        <div>
+            <div class="infobox">
+                <h5>Was, wenn du dein neues Passwort vergisst?</h5>
+                <p>Wir können dein Passwort auch zurücksetzen und geben dir dann dein neues.</p>
+
+                <!-- <a onclick="">Mehr Erfahren<img class="cta-link-img" src="../images/cta-link.svg"></a> -->
+            </div>
+
+            <div class="infobox">
+                <h5>Fragen</h5>
+
+                <a onclick="">Chatte mit dem Abizeitungskomitee<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="footer">
+
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

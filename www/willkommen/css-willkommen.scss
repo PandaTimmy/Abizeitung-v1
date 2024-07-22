@@ -1,0 +1,231 @@
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
+
+body {
+    background-color: black;
+    user-select: none;
+    text-size-adjust: 100%;
+    margin: 0px;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+body {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+body::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.slide {
+
+    max-width: 500px;
+    width: 70vw;
+    box-shadow: 0 0 80px 10px #ffffff26;
+    border-radius: 50px;
+    margin: 15vh auto 20px auto;
+    display: block;
+    border: 1px solid #ffffff23;
+    height: 70vh;
+    padding: 40px 5px 40px 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: all 1.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    @media screen and (max-width: 650px) {
+        width: auto;
+        margin-left: 75px;
+        margin-right: 75px;
+        margin-top: 10vh;
+
+        box-shadow: 0 0 60px 10px #ffffff26;
+
+
+        @media screen and (max-width: 500px) {
+            width: auto;
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+    }
+}
+
+
+.thumb-1 {
+
+    img {
+        width: 200px;
+        box-shadow: 0 0 80px 10px #ffffff26;
+        border-radius: 25%;
+        margin: 10vh auto 0 auto;
+        display: block;
+        border: 1px solid #ffffff23;
+
+    }
+
+    h1 {
+        color: #FFF;
+        font-size: 56px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: center;
+
+        @media screen and (max-width: 900px) {
+            font-size: 36px;
+        }
+    }
+    h2 {
+        padding-top: 24px;
+        color: #FFF;
+        text-align: center;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 0 50px;
+
+        @media screen and (max-width: 800px) {
+            font-size: 24px;
+            font-size: 20px;
+
+        }
+    }
+}
+
+.thumb-2 {
+    background-image:  url("../images/Thumbnail-min.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 500px;
+    background-position-y: 300px;
+
+
+    
+
+    h3 {
+        color: #D90000;
+        text-align: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 10px;
+
+        transition: all 1s ease-in-out;
+
+    }
+    h1 {
+        color: #FFF;
+        font-size: 56px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 30px;
+
+        transition: all 1s ease-in-out;
+
+    }
+    h2 {
+        padding-top: 24px;
+        color: #FFF;
+        text-align: center;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 0 30px;
+
+        transition: all 1s ease-in-out;
+
+
+        @media screen and (max-width: 800px) {
+            font-size: 24px;
+        }
+    }
+
+
+}
+
+.first {
+    h2 {
+        padding-top: 24px;
+        color: #FFF;
+        text-align: center;
+        font-size: 42px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 0 50px;
+
+        @media screen and (max-width: 800px) {
+            font-size: 24px;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 40px;
+        line-height: 30px;
+
+        li {
+            color: #FFF;
+            transition: all .5s ease-in-out;
+
+        }
+
+        hr {
+            opacity: .2;
+            transition: all .5s ease-in-out;
+        }
+    }
+
+    button {
+        display: block;
+        margin: 30px auto 20px auto;
+        background-color: black;
+        color: white;
+        border: 1px solid #ffffff23;
+        padding: 20px;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 20px 3px #ffffff26;
+
+    }
+}
+
+
+.slides-dots {
+    
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+
+    div {
+        display: flex;
+    align-items: center;
+    justify-content: center;
+        div {
+            margin: 3px;
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff58;
+            border-radius: 3px;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+            
+            &.selected {
+                background-color: #ffffffaa;
+    
+            }
+        }
+    }
+    
+
+    
+}

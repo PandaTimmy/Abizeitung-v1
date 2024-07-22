@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-moderation.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/umfrageErstellen.js"></script>
+    <script src="../javascript/umfrageLöschen.js"></script>
+    <script src="../javascript/umfrageBeenden.js"></script>
+    <script src="../javascript/umfrageStarten.js"></script>
+    <script src="../javascript/umfrageAntwortAbschicken.js"></script>
+    <script src="../javascript/umfrageAntwortLaden.js"></script>
+    <script src="../javascript/umfrageAntwortLöschen.js"></script>
+    <script src="../javascript/decryptTree.js"></script>
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/zitatAbschicken.js"></script>
+    <script src="../javascript/zitatLöschen.js"></script>
+    <script src="../javascript/zitatFavorisieren.js"></script>
+    <script src="../javascript/zitateZurücksetzen.js"></script>
+    <script src="../javascript/umfrageAntwortFavorisieren.js"></script>
+    <script src="../javascript/umfrageAntwortenLaden.js"></script>
+    <script src="../javascript/test.js"></script>
+    <script src="../javascript/beichtenZurücksetzen.js"></script>
+    <script src="../javascript/treeZurücksetzen.js"></script>
+    <script src="../javascript/storysZurücksetzen.js"></script>
+    <script src="../javascript/beichteAbschicken.js"></script>
+    <script src="../javascript/beichteFavorisieren.js"></script>
+    <script src="../javascript/beichteLöschen.js"></script>
+    <script src="../javascript/storyAbschicken.js"></script>
+    <script src="../javascript/storyFavorisieren.js"></script>
+    <script src="../javascript/storyLöschen.js"></script>
+    <script src="../javascript/zitateLaden.js"></script>
+    <script src="../javascript/beichtenLaden.js"></script>
+    <script src="../javascript/storysLaden.js"></script>
+    <script src="../javascript/info.js"></script>
+    <script src="../javascript/beichteLöschen.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/benutzerLaden.js"></script>
+    <script src="../javascript/benutzerDegradierenBefördern.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../konto";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+        if (getCookie("rolle") == "Schüler") {
+            weiterleiten("../startseite");
+        }
+
+
+        function bodyReady() {
+
+            console.log("test");
+
+            zeilenTabelleZählenUndDivAktualisieren("user-count", "benutzerkonten", true);
+            zeilenTabelleZählenUndDivAktualisieren("beichten-count", "beichten", true);
+            zeilenTabelleZählenUndDivAktualisieren("storys-count", "storys", true);
+            zeilenTabelleZählenUndDivAktualisieren("zitate-count", "zitate", true);
+
+            benutzerLaden(getCookie("login"));
+
+            $.ajax({
+                type: "POST",
+                url: "../php/customLinks.php", // Hier den Pfad zu deinem PHP-Skript angeben
+                data: { user_login: getCookie("login") },
+                success: function(response) {
+                    // Hier kannst du den Erfolg der Anfrage behandeln
+                    console.log(response);
+                    document.getElementById("moderation-links").innerHTML = response + document.getElementById("moderation-links").innerHTML;
+                },
+                error: function(error) {
+                    // Hier kannst du Fehler bei der Anfrage behandeln
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
+
+    <style>
+        .load {
+        --uib-size: 35px;
+        --uib-color: black;
+        --uib-speed: 1.5s;
+        --uib-dot-size: calc(var(--uib-size) * 0.4);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--uib-dot-size);
+        width: var(--uib-size);
+        margin: 0 auto 0 auto;
+        }
+
+        .load::before,
+        .load::after {
+        content: '';
+        position: absolute;
+        height: var(--uib-dot-size);
+        width: var(--uib-dot-size);
+        border-radius: 50%;
+        background-color: var(--uib-color);
+        flex-shrink: 0;
+        transition: background-color 0.3s ease;
+        }
+
+        .load::before {
+        animation: orbit var(--uib-speed) linear infinite;
+        }
+
+        .load::after {
+        animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
+        }
+
+        @keyframes orbit {
+        0% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        5% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        10% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        15% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        20% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        25% {
+            transform: translateX(0%) scale(0.47368);
+            opacity: 0.3;
+        }
+        30% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        35% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        40% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        45% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        50% {
+            transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        55% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        60% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        65% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        70% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        75% {
+            transform: translateX(0%) scale(1);
+            opacity: 1;
+        }
+        80% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        85% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        90% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        95% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        100% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        }
+    </style>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+
+<!--  ///////////////////  NAVBAR DARK  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-dark.js"></script>
+<script>loadNav(false, false);</script>
+
+
+
+<div style="height: 100px;"></div>
+<div style="height: 7.5vw;"></div>
+
+
+
+<div class="main">
+
+
+    <!-- <h5 class="article-eyebrow">ABIZEITUNGSAPP</h5> -->
+
+    <h1>Moderation</h1>
+
+
+    
+    <!-- <p id="schüler-text" style="display: block;"><span class="thick">Du bist ein Schüler.</span> Entdecke unten die vielen Funktionen, die diese App bietet. Nimm an Abstimmungen teil oder schicke Zitate ab.</p> -->
+
+    <div style="height: 10px;"></div>
+
+
+    <div class="links" id="moderation-links">
+        <div class="link" onclick="weiterleiten('../steckbriefe-einstellungen')">
+            <h3>
+                Steckbriefe Einstellungen
+            </h3>
+            <div class="bottom">Fragen bei Steckbriefen bearbeiten</div>
+        </div>
+
+        <div class="link" onclick="weiterleiten('../zitate-moderieren')">
+            <h3>
+                Zitate Moderieren
+            </h3>
+            <div class="bottom">Insgesamt <span id="zitate-count">0</span> Zitate</div>
+        </div>
+
+        <div class="link" onclick="weiterleiten('../beichten-moderieren')">
+            <h3>
+                Beichten Moderieren
+            </h3>
+            <div class="bottom">Insgesamt <span id="beichten-count">0</span> Beichten</div>
+        </div>
+
+        <div class="link" onclick="weiterleiten('../storys-moderieren')">
+            <h3>
+                Storys Moderieren
+            </h3>
+            <div class="bottom">Insgesamt <span id="storys-count">0</span> Storys</div>
+        </div>
+
+        <div class="link" onclick="weiterleiten('../passwort-zurücksetzen')">
+            <h3>
+                Passwörter Zurücksetzen
+            </h3>
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+</div>
+
+<div style="background-color: black; padding: 100px 0 100px 0;">
+
+<div class="main">
+
+    <h2 class="lighterText">Benutzer Verwalten</h2>
+
+    <h2 class="article-eyebrow">ALLE ADMINS</h2>
+
+    <div class="load" style="margin-top: 50px; margin-bottom: 50px;" id="admin-load"></div>
+
+    <div id="benutzer-admins" class="benutzerListe">
+
+    </div>
+
+
+    <h2 class="article-eyebrow">ALLE SCHÜLER <span class="h3-light">(<span id="user-count">0</span>)</span></h2>
+
+    <div class="load" style="margin-top: 50px; margin-bottom: 50px;" id="students-load"></div>
+
+    <div id="benutzer-alle" class="benutzerListe"></div>
+
+
+</div>
+
+</div>
+
+
+
+<!--  ///////////////////  FOOTER DARK  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-dark.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

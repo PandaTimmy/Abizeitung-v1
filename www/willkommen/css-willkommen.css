@@ -1,0 +1,202 @@
+@import url("https://fonts.cdnfonts.com/css/helvetica-neue-5");
+body {
+  background-color: black;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  margin: 0px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.slide {
+  max-width: 500px;
+  width: 70vw;
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.1490196078);
+  border-radius: 50px;
+  margin: 15vh auto 20px auto;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.137254902);
+  height: 70vh;
+  padding: 40px 5px 40px 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: all 1.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+@media screen and (max-width: 650px) {
+  .slide {
+    width: auto;
+    margin-left: 75px;
+    margin-right: 75px;
+    margin-top: 10vh;
+    box-shadow: 0 0 60px 10px rgba(255, 255, 255, 0.1490196078);
+  }
+}
+@media screen and (max-width: 650px) and (max-width: 500px) {
+  .slide {
+    width: auto;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}
+
+.thumb-1 img {
+  width: 200px;
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.1490196078);
+  border-radius: 25%;
+  margin: 10vh auto 0 auto;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.137254902);
+}
+.thumb-1 h1 {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+@media screen and (max-width: 900px) {
+  .thumb-1 h1 {
+    font-size: 36px;
+  }
+}
+.thumb-1 h2 {
+  padding-top: 24px;
+  color: #FFF;
+  text-align: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 50px;
+}
+@media screen and (max-width: 800px) {
+  .thumb-1 h2 {
+    font-size: 24px;
+    font-size: 20px;
+  }
+}
+
+.thumb-2 {
+  background-image: url("../images/Thumbnail-min.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 500px;
+  background-position-y: 300px;
+}
+.thumb-2 h3 {
+  color: #D90000;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 10px;
+  transition: all 1s ease-in-out;
+}
+.thumb-2 h1 {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  transition: all 1s ease-in-out;
+}
+.thumb-2 h2 {
+  padding-top: 24px;
+  color: #FFF;
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 30px;
+  transition: all 1s ease-in-out;
+}
+@media screen and (max-width: 800px) {
+  .thumb-2 h2 {
+    font-size: 24px;
+  }
+}
+
+.first h2 {
+  padding-top: 24px;
+  color: #FFF;
+  text-align: center;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 50px;
+}
+@media screen and (max-width: 800px) {
+  .first h2 {
+    font-size: 24px;
+  }
+}
+.first ul {
+  list-style: none;
+  padding: 40px;
+  line-height: 30px;
+}
+.first ul li {
+  color: #FFF;
+  transition: all 0.5s ease-in-out;
+}
+.first ul hr {
+  opacity: 0.2;
+  transition: all 0.5s ease-in-out;
+}
+.first button {
+  display: block;
+  margin: 30px auto 20px auto;
+  background-color: black;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.137254902);
+  padding: 20px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 3px rgba(255, 255, 255, 0.1490196078);
+}
+
+.slides-dots {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+}
+.slides-dots div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slides-dots div div {
+  margin: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.3450980392);
+  border-radius: 3px;
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.slides-dots div div.selected {
+  background-color: rgba(255, 255, 255, 0.6666666667);
+}/*# sourceMappingURL=css-willkommen.css.map */

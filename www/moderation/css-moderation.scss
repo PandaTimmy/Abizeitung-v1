@@ -1,0 +1,228 @@
+body {
+    user-select: none;
+    text-size-adjust: 100%;
+    background-color: rgb(15, 15, 15);
+    max-width: 100%;
+    color: white; //rgb(134, 134, 139)
+}
+
+.main {
+
+    //margin: 0px 64px 0 64px;
+    margin: 0px 13vw 0 13vw;
+
+    @media screen and (max-width: 600px) {
+        margin: 0px 32px 0 32px;
+    }
+
+}
+
+
+
+
+h1 {
+    margin: 0 0 100px 0;
+    font-size: 8vw;
+    font-weight: 600;
+    line-height: 8vw;
+
+
+    @media screen and (max-width: 615px) {
+        font-size: 48px;
+        line-height: 48px;
+    }
+}
+
+h2 {
+    margin: 0 0 50px 0;
+    font-size: 4vw;
+    font-weight: 600;
+    line-height: 4vw;
+
+
+    @media screen and (max-width: 615px) {
+        font-size: 32px;
+        line-height: 32px;
+    }
+}
+
+.article-eyebrow {
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.324px;
+}
+
+
+
+.benutzerListe {
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+
+    @media screen and (max-width: 500px) {
+        grid-template-columns: 100%;
+    }
+
+    @media screen and (min-width: 900px) {
+        grid-template-columns: 32% 32% 32%;
+    }
+
+    @media screen and (min-width: 1200px) {
+        grid-template-columns: 24% 24% 24% 24%;
+    }
+
+    @media screen and (min-width: 1500px) {
+        grid-template-columns: 20% 19% 19% 19% 20%;
+    }
+}
+
+
+.benutzerKachel {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    border: 1px solid rgba(194, 194, 199, 0.635);
+    filter: drop-shadow(rgba(0, 0, 0, 0.027) 1px 2px 6px);
+
+    p {
+        margin: 0 0 0 10px;
+    }
+
+}
+
+
+.links {
+
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+
+    @media screen and (max-width: 900px) {
+        grid-template-columns: 100%;
+    }
+
+    @media screen and (min-width: 1300px) {
+        grid-template-columns: 33% 33% 33%;
+    }
+
+    .link {
+
+        width: 100%;
+        min-height: 140px;
+        cursor: pointer;
+
+        background-color: rgb(250, 250, 250);
+        background-color: black;
+        
+        padding: 25px;
+        box-sizing: border-box;
+        position: relative;
+        text-align: center;
+
+        .top {
+            font-size: 16px;
+            user-select: text;
+            letter-spacing: 0.231px;
+            font-weight: 600;
+            color: rgb(134, 134, 139);
+
+            img {
+                user-select: none;
+            }
+        }
+
+        .bottom {
+            justify-content: space-between;
+            font-size: 17px;
+            user-select: text;
+            margin: auto;
+            width: 100%;
+            color: white;
+            font-weight: 400;
+            letter-spacing: -0.374;
+            
+        }
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-top: 5px;
+            overflow: hidden;
+            user-select: text;
+            margin-bottom: 11px;
+            letter-spacing: 0.128px;
+
+        }
+    }
+}
+
+
+select {
+    color: rgb(0, 0, 0);
+    color: white;
+    box-sizing: border-box;
+    //height: 40px;
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
+    appearance: none;
+    margin: 0 auto 0 auto;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 16px;
+    display: block;
+
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(66, 66, 69, 0.7);
+    border-radius: 40px;
+    padding: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    border: 1px solid rgba(194, 194, 199, 0.635);
+    border: 1px solid rgba(194, 194, 199, 0.014);
+
+    outline: none;
+
+    
+}
+
+p {
+    color: rgb(134, 134, 139);
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    line-height: 28px;
+    letter-spacing: 0.231px;
+
+    .thick {
+        color: rgb(0, 0, 0);
+    }
+}
+
+.selectable {
+    user-select: all;
+}
+
+
+.lighterText {
+    color: rgb(134, 134, 139);
+}
+
+a {
+    &:hover {
+        text-decoration: underline;
+    }
+}

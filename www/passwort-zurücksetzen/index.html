@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-anmelden.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/navbar.js"></script>
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/copyPasta.js"></script>
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+        function bodyReady() {
+            benutzerLadenSelect();
+
+            setTimeout(function() {
+
+                if(getCookie("resetPassUserSelected") != "") {
+                    var userSelectedForReset = getCookie("resetPassUserSelected");
+                    deleteCookie("resetPassUserSelected");
+                    document.getElementById("schüler").value = userSelectedForReset;
+                    selectUsernameChange();
+                    console.log(userSelectedForReset);
+                }
+
+            }, 100);
+
+        }
+
+
+        function resetPass() {
+            let user_login = getCookie("login");
+            let benutzername = document.getElementById("schüler").value;
+            let benutzernameConfirm = document.getElementById("benutzerBestätigen").value;
+    
+            console.log(user_login);
+            console.log(benutzername);
+
+            if ( benutzername == "-") {
+                document.getElementById("error").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Du musst einen Schüler auswählen.</div>";
+                document.getElementById("schüler").style.borderColor = "rgb(227, 0, 0)";
+                document.getElementById("schüler").style.backgroundColor = "rgb(255, 242, 244)";
+                document.getElementById("schüler").style.color = "rgb(227, 0, 0)";
+            }
+            else {
+                if ( benutzername != benutzernameConfirm ) {
+                    document.getElementById("error").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Benutzername passt nicht.</div>";
+                    document.getElementById("benutzerBestätigen").style.borderColor = "rgb(227, 0, 0)";
+                    document.getElementById("benutzerBestätigen").style.backgroundColor = "rgb(255, 242, 244)";
+                    document.getElementById("benutzerBestätigenLabel").style.color = "rgb(227, 0, 0)";
+
+                    console.log(benutzername);
+                    console.log(benutzernameConfirm);
+
+                }
+
+                else {
+
+                    document.getElementById("error").innerHTML = "";
+                    document.getElementById("benutzerBestätigen").style.borderColor = "#C2C2C7";
+                    document.getElementById("benutzerBestätigen").style.backgroundColor = "white";
+                    document.getElementById("benutzerBestätigenLabel").style.color = "#C2C2C7";
+
+                    if (confirm("Bist du dir sicher, dass du das Passwort von "+benutzername+" zurücksetzen willst?") == true) {
+                
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/resetPass.php", // Hier den Pfad zu deinem PHP-Skript angeben
+                            data: { user_login: user_login, benutzername: benutzername },
+                            success: function(response) {
+                                // Hier kannst du den Erfolg der Anfrage behandeln
+                                console.log(response);
+
+                                // if (response == 0) {
+
+                                //     document.getElementById("error1").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Gib gültige Anmeldedaten an.</div>";
+                                //     document.getElementById("error2").innerHTML = "";
+
+                                //     document.getElementById("inputOldPass").style.borderColor = "rgb(227, 0, 0)";
+                                //     document.getElementById("inputOldPass").style.backgroundColor = "rgb(255, 242, 244)";
+                                //     document.getElementById("inputOldPassLabel").style.color = "rgb(227, 0, 0)";
+
+                                //     document.getElementById("inputNewPass").style.borderColor = "#C2C2C7";
+                                //     document.getElementById("inputNewPass").style.backgroundColor = "white";
+                                //     document.getElementById("inputNewPassLabel").style.color = "#C2C2C7";
+
+                                //     document.getElementById("inputNewPassConfirm").style.borderColor = "#C2C2C7";
+                                //     document.getElementById("inputNewPassConfirm").style.backgroundColor = "white";
+                                //     document.getElementById("inputNewPassConfirmLabel").style.color = "#C2C2C7";
+
+                                // }
+                                // if (response == -1 || response == -2 || response == -3 || response == -4) {
+
+                                //     document.getElementById("error1").innerHTML = "";
+
+                                //     if (response == -1 ) {
+                                //         document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Die neuen Passwörter stimmen nicht überein.</div>";
+                                //     }
+                                //     if (response == -2 ) {
+                                //         document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort ist zu kurz. (mind. 3 Zeichen)</div>";
+                                //     }
+                                //     if (response == -3 ) {
+                                //         document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort ist zu lang. (max. 50 Zeichen)</div>";
+                                //     }
+                                //     if (response == -4 ) {
+                                //         document.getElementById("error2").innerHTML = "<div style='position: absolute; color: rgb(227, 0, 0); margin-top: 15px; border-radius: 10px; font-size: 12px; ' >Das Passwort enthält verbotene Zeichen. <br> (Nur Buchstaben (a-z, A-Z), Zahlen (0-9), Sonderzeichen (.,~!§$/()=ß?#+*-_@:<>^°)</div>";
+                                //     }
+
+                                //     document.getElementById("inputOldPass").style.borderColor = "#C2C2C7";
+                                //     document.getElementById("inputOldPass").style.backgroundColor = "white";
+                                //     document.getElementById("inputOldPassLabel").style.color = "#C2C2C7";
+
+                                //     document.getElementById("inputNewPass").style.borderColor = "rgb(227, 0, 0)";
+                                //     document.getElementById("inputNewPass").style.backgroundColor = "rgb(255, 242, 244)";
+                                //     document.getElementById("inputNewPassLabel").style.color = "rgb(227, 0, 0)";
+
+                                //     document.getElementById("inputNewPassConfirm").style.borderColor = "rgb(227, 0, 0)";
+                                //     document.getElementById("inputNewPassConfirm").style.backgroundColor = "rgb(255, 242, 244)";
+                                //     document.getElementById("inputNewPassConfirmLabel").style.color = "rgb(227, 0, 0)";
+
+                                // }
+                                // if (response == 1) {
+                                //     deleteCookie("login");
+                                //     deleteCookie("rolle");
+                                //     deleteCookie("anzeigename");
+                                //     deleteCookie("benutzername");
+                                //     deleteCookie("initialien");
+
+                                //     alert("Du hast erfolgreich dein Passwort aktualisiert. Du musst dich nun erneut anmelden.")
+                                    
+                                //     weiterleiten("../anmelden");
+                                // }
+
+                                document.getElementById("newUser").textContent = response.split("✩")[1];
+                                document.getElementById("newPass").textContent = response.split("✩")[0];
+
+                                document.getElementById("resetPassSection").style.display = "none";
+                                document.getElementById("newPassSection").style.display = "block";
+
+                            },
+                            error: function(error) {
+                                // Hier kannst du Fehler bei der Anfrage behandeln
+                                console.log(error);
+                            }
+                        });
+                    }
+                    
+                    else {
+                    }
+
+
+                }
+            }
+
+
+
+        }
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+
+<!--  ///////////////////  NAVBAR DARK  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-dark.js"></script>
+
+
+<div class="top-spacing-1"></div>
+
+<div class="main">
+
+    <div class="main-grid">
+        <div>
+            <div id="resetPassSection">
+
+
+                <h2>Passwort Zurücksetzen</h2>
+                <p>Setze des Passwort von einem anderem Schüler zurück.</p>
+                <p>Passwörter von Admins kann man nicht zurücksetzen. Nur Timmy darf Admin Passwörter zurücksetzen. Gib Timmy bescheid.</p>
+
+                <select name="schüler" id="schüler" onchange="selectUsernameChange()" style="margin-top: 64px;">
+                    <option value="-" selected disabled hidden>Schüler Auswählen</option>
+                </select>
+
+                <script>
+                    function selectUsernameChange() {
+                        document.getElementById('schüler').style.color = 'black';
+                        document.getElementById('schüler').style.backgroundColor = 'white';
+                        document.getElementById('schüler').style.borderColor = 'rgb(194, 194, 199)';
+                        document.getElementById('benutzernameLabel').textContent = document.getElementById("schüler").value;
+                        document.getElementById('benutzernameLabel').style.color = 'black';
+                        document.getElementById('benutzerBestätigen').value = '';
+                        labelAnimationFocusOut('benutzerBestätigen','benutzerBestätigenLabel');
+                    }
+                </script>
+
+                <div style="margin-top: 15px;">
+                    <label id="benutzernameLabel">Benutzername</label>
+
+                    <input disabled id="benutzername">
+                </div>
+
+
+                <div style="margin-top: 15px;">
+                    <label id="benutzerBestätigenLabel">Bestätigen (Benutzername vom Schüler erneut eingeben)</label>
+
+                    <input id="benutzerBestätigen" autocomplete="off" onfocus="labelAnimationFocus('benutzerBestätigen','benutzerBestätigenLabel')" onblur="labelAnimationFocusOut('benutzerBestätigen','benutzerBestätigenLabel')">
+                </div>
+
+                
+
+                
+
+                <div id="error"></div>
+
+
+                <script>
+
+                    function benutzerLadenSelect() {
+
+                        var user_login = getCookie("login");
+                        var condition = 0;
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/benutzerLadenSelect.php", // Hier den Pfad zu deinem PHP-Skript angeben
+                            data: { user_login: user_login, condition: condition },
+                            success: function(response) {
+
+                                var deinBenutzername = getCookie("benutzername");
+        
+                                console.log(response);
+
+                                response = response.split("☾").slice(1);
+
+                                for (let i = 0; i < response.length; i++) {
+
+                                    var rechte = response[i].split("✩")[4];
+                                    var name = response[i].split("✩")[1] + " " +response[i].split("✩")[0];
+                                    var benutzername = response[i].split("✩")[2]
+                                    console.log(name);
+                                    console.log(benutzername);
+
+                                    if (benutzername != deinBenutzername) {
+                                        if (rechte == 0) {
+                                            document.getElementById("schüler").innerHTML += "<option value='"+benutzername+"''>"+name+"</option>";
+                                        }
+                                        else {
+                                            document.getElementById("schüler").innerHTML += "<option disabled hidden>"+name+" (Admin)</option>";
+                                        }
+                                    }
+                                    else {
+                                        document.getElementById("schüler").innerHTML += "<option disabled hidden >"+name+" (Du)</option>";
+                                    }
+
+                                    
+
+                                }
+
+                            },
+                            error: function(error) {
+                                // Hier kannst du Fehler bei der Anfrage behandeln
+                                console.log(error);
+                            }
+                        });
+
+                    }
+
+                    function copyPass() {
+
+                        var copyText = document.getElementById("myInput");
+
+                        // Select the text field
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+                        // Copy the text inside the text field
+                        navigator.clipboard.writeText(copyText.value);
+
+                        // Alert the copied text
+                        alert("Copied the text: " + copyText.value);
+                    }
+
+
+                </script>
+
+                <button style="margin-top: 64px;" onclick="weiterleiten('../moderation')">Abbrechen</button>
+                <button style="margin-top: 25px; border: 2px solid black; background-color: white; color: black;" onclick="resetPass()">Passwort Zurücksetzen</button>
+            </div>
+
+            <div id="newPassSection" style="display: none;">
+
+                <h2>Neues Passwort</h2>
+                <p>Das Passwort wurde erfolgreich zurückgesetzt. Hier sind die neuen Anmeldedaten:</p>
+
+
+                <div style="margin-top: 64px;">
+                    <label style="margin-top: 10px; margin-left: 16px; font-size: 12px; color: rgba(255, 255, 255, 0.389);">Benutzername</label>
+                    <div class="pass" style="color: white;" id="newUser">QWERTY</div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label style="margin-top: 10px; margin-left: 16px; font-size: 12px; color: rgba(255, 255, 255, 0.389);">Neues Passwort</label>
+                    <div class="pass" style="color: white;" id="newPass">QWERTY</div>
+                </div>
+
+                <button style="margin-top: 25px;" onclick="copyPass()">Anmeldedaten Kopieren</button>
+                <button style="margin-top: 64px;" onclick="weiterleiten('../passwort')">Weiteres Passwort Zurücksetzen</button>
+                <button style="margin-top: 25px; border: 2px solid black; background-color: white; color: black;" onclick="weiterleiten('../moderation')">Zurrück zur Moderationsseite</button>
+
+                <script>
+                    function copyPass() {
+                        var copyUsername = document.getElementById("newUser").textContent;
+                        var copyPassword = document.getElementById("newPass").textContent;
+                        var textToCopy = "Benutzername: "+copyUsername+" Passwort: "+copyPassword;
+
+                        console.log(textToCopy);
+                        copyTextToClipboard(textToCopy);
+
+                        alert("Neue Anmeldedaten von "+copyUsername+" in die Zwischenablage kopiert.")
+                    }
+                </script>
+            </div>
+
+        </div>
+
+        <script>
+
+            function labelAnimationFocus(inputid,labelid) {
+
+                document.getElementById(labelid).style.marginTop = "10px";
+                document.getElementById(labelid).style.fontSize = "12px";
+            }
+
+            function labelAnimationFocusOut(inputid,labelid) {
+
+            if (document.getElementById(inputid).value == "") {
+                document.getElementById(labelid).style.marginTop = "18px";
+                document.getElementById(labelid).style.fontSize = "17px";
+            }
+            }
+
+
+        </script>
+
+        <div>
+            <!-- <div class="infobox">
+                <h5>Was, wenn du dein neues Passwort vergisst?</h5>
+                <p>Wir können dein Passwort auch zurücksetzen und geben dir dann dein neues.</p>
+
+                <a onclick="">Mehr Erfahren<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div> -->
+
+            <div class="infobox">
+                <h5>Fragen</h5>
+
+                <a onclick="">Frag Timmy<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="footer" style="background-color: rgb(29, 29, 32); ">
+
+    <div class="footer-links" style="color: white;">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-steckbriefe.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/ausloggen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/steckbrief-zugriffe-laden.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../steckbriefe-einstellungen";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+
+
+        function autoSize(textarea) {
+            textarea.style.height = 'auto'; // Zurücksetzen auf automatische Höhe
+            textarea.style.height = (textarea.scrollHeight + 2) + 'px'; // Anpassen der Höhe
+        }
+
+        function formularLaden(benutzer) {
+                var user_login = getCookie("login");
+
+                console.log(benutzer);
+                console.log(user_login);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../php/steckbriefFormularLaden.php",
+
+                    data: { user_login: user_login, benutzer: benutzer, },
+
+                    success: function(response) {
+
+                        console.log(response)
+
+                        document.getElementById("steckbriefeBearbeiten").innerHTML = response;
+
+                    },
+                    error: function(error) {
+
+                        console.log(error);
+                    }
+                });
+            }
+
+
+        function bodyReady() {
+            
+            setTimeout(() => {
+
+                zugriffLaden(getCookie("login"));
+                steckbriefeLaden(getCookie("login"));
+                
+            }, 100);
+
+
+            formularLaden("KlimkeTim");
+
+
+            var user_login = getCookie("login");
+            $.ajax({
+                    type: "POST",
+                    url: "../php/steckbriefFreischaltungPrüfen.php",
+
+                    data: { user_login: user_login },
+
+                    success: function(response) {
+
+                        console.log(response)
+
+                        if (response == 1) {
+                            document.getElementById("steckbriefe").style.display = "block";
+                            document.getElementById("zugriffskontrolleFarbe").style.backgroundColor = "white";
+                        }
+                        if (response == 0) {
+                            document.getElementById("zugriffskontrolleFreischaltenKnopf").style.display = "block";
+                        }
+
+                    },
+                    error: function(error) {
+
+                        console.log(error);
+                    }
+                });
+        }
+
+
+    </script>
+
+
+
+    <style>
+        .load {
+        --uib-size: 35px;
+        --uib-color: black;
+        --uib-speed: 1.5s;
+        --uib-dot-size: calc(var(--uib-size) * 0.4);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--uib-dot-size);
+        width: var(--uib-size);
+        margin: 0 auto 0 auto;
+        }
+    
+        .load::before,
+        .load::after {
+        content: '';
+        position: absolute;
+        height: var(--uib-dot-size);
+        width: var(--uib-dot-size);
+        border-radius: 50%;
+        background-color: var(--uib-color);
+        flex-shrink: 0;
+        transition: background-color 0.3s ease;
+        }
+    
+        .load::before {
+        animation: orbit var(--uib-speed) linear infinite;
+        }
+    
+        .load::after {
+        animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
+        }
+    
+        @keyframes orbit {
+        0% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        5% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        10% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        15% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        20% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        25% {
+            transform: translateX(0%) scale(0.47368);
+            opacity: 0.3;
+        }
+        30% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        35% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        40% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        45% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        50% {
+            transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        55% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        60% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        65% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        70% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        75% {
+            transform: translateX(0%) scale(1);
+            opacity: 1;
+        }
+        80% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        85% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        90% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        95% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        100% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        }
+    </style>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+<script>loadNav(false, false);</script>
+
+
+
+<div style="height: 100px;"></div>
+<div style="height: 7.5vw;"></div>
+
+
+<div id="steckbriefeMain" style="display: block;">
+
+
+<div class="main">
+
+    <div class="exampleBig" style="z-index: -100; position: absolute; left: 0; width: 100%; height: 1000px;">
+        <div class="main">
+            <img style="z-index: -100; width: 25vw; margin-left: auto; display: block; transform: translateY(-5vw) translateX(5vw);" src="Bilder/example.jpg">
+
+        </div>
+
+    </div>
+
+
+
+
+    <h5 class="article-eyebrow">FÜR DEINE FREUNDE ERSTELLEN</h5>
+
+    <h1 style="z-index: 99;">Steckbriefe</h1>
+
+    <div class="exampleSmall" style="z-index: -10; position: relative; margin-top: -60px;">
+        <img style="z-index: -10; width: 70vw; margin: 0 auto 0 auto; display: block; transform: translateY(-2vw);" src="Bilder/example.jpg">
+
+    </div>
+
+        <p id="moderation-text"><span class="thick">Herzlich Willkommen.</span> Hier kannst du an den Steckbriefen deiner Klassenkameraden mitarbeiten, sofern sie dich als mitarbeiter gewählt haben.</p>
+
+
+    <div style="height: 50px;"></div>
+
+
+
+
+    <div style="height: 100px;"></div>
+
+</div>
+<div id="steckbriefe"  style="width: 100%; background-color: rgb(243, 243, 246); padding: 100px 0 100px 0; display: none;">
+
+
+<div class="main">
+
+
+    <h2>Mithelfen</h2>
+
+    <div class="steckbriefe" id="steckbriefeHinzu">
+
+
+        <script>
+
+            function steckbriefeLaden(login) {
+                var user_login = getCookie("login");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/steckbriefe-laden.php",
+
+                        data: { user_login: user_login },
+
+                        success: function(response) {
+
+                            document.getElementById("steckbriefeHinzu").innerHTML += response;
+                        },
+                        error: function(error) {
+
+                            console.log(error);
+                        }
+                    });
+
+            }
+
+        </script>
+
+
+        <!-- <div class="steckbrief-kachel" style="background-image: url(Bilder/Timmy.jpg);">
+            <div>
+                <div>
+                    <h3>KREATIV, ENGAGIERT, DETAILORIENTIERT</h3>
+                    <h2>Timothy Klimke</h2>
+                </div>
+            </div>
+        </div> -->
+    
+
+    
+    </div>
+
+
+</div></div>
+
+<div id="zugriffskontrolleFarbe" style="background-color: rgba(243, 243, 246, 0.539);">
+
+    <div class="main" style="padding: 100px 0 100px 0;" id="zugriffskontrolle">
+
+        <h5 class="article-eyebrow">STECKBRIEFE FREISCHALTEN</h5>
+        <!-- <h5 class="article-eyebrow">WER DARF MITMACHEN?</h5> -->
+        <h2>Zugriffskontrolle</h2>
+        <p id="moderation-text" style="margin-top: 70px;"><span class="thick">Du entscheidest,</span> wer deinen Steckbrief machen darf. Entweder ausgewählte Personen oder die ganze Stufe.</p>
+
+
+
+        <div style="height: 100px;"></div>
+
+        <div class="auswählenPersonenKategorie">
+            <button id="zugriffJederKnopf" style="border-radius: 12px 0 0 12px; border-width: 1px;" onclick="steckbriefZugriffeZurücksetzen(1)">Jeder</button>
+            <button id="zugriffBegrenztKnopf" style="border-radius: 0 12px 12px 0px; border-width: 1px 1px 1px 0;" onclick="steckbriefZugriffeZurücksetzen(0)">Begrenzt</button>
+
+
+            <script>
+
+            function steckbriefZugriffeZurücksetzen(setVal) {
+
+                var user_login = getCookie("login");
+
+                $.ajax({
+                        type: "POST",
+                        url: "../php/steckbrief-zugriffe-zurücksetzen.php",
+
+                        data: { user_login: user_login, setVal: setVal },
+
+
+                        success: function(response) {
+                            zugriffLaden(user_login);
+                        },
+                        error: function(error) {
+
+                            console.log(error);
+                        }
+                    });
+
+                }
+
+
+
+            </script>
+        </div>
+        
+        <br>
+
+        <div class="personenKontainer" id="personenHinzufügenKontainer">
+
+            <select class="personHinzufügen" id="zugriffePersonenAuswählen" onchange="zugriffPersonHinzufügen(getCookie('login'), document.getElementById('zugriffePersonenAuswählen').value, 1)">
+                <option disabled hidden selected>+ Person Hinzufügen</option>
+            </select>
+
+            <div id="personenAusgewählt"></div>
+
+            <script>
+
+                function zugriffPersonHinzufügen() {
+                    document.getElementById("zugriffePersonenAuswählen").value
+                }
+
+                function zugriffPersonHinzufügen(user_login, person, setVal) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/steckbrief-zugriff-eintragen.php",
+
+                        data: { user_login: user_login, person: person, setVal, setVal },
+
+                        success: function(response) {
+
+                            zugriffLaden(user_login);
+
+                        },
+                        error: function(error) {
+
+                            console.log(error);
+                        }
+                    });
+                    }
+
+            </script>
+
+            <!-- <div class="person"><span class="name">Tim Cook</span><span class="entfernen">Entfernen</span></div> -->
+            <!-- <div class="person"><span class="name">Steve Jovs</span><span class="entfernen">Entfernen</span></div> -->
+
+        </div>
+
+        <div style="height: 50px;"></div>
+
+        <div id="zugriffskontrolleFreischaltenKnopf" style="display: none;">
+
+            <button class="buttonNewStyle" onclick="steckbriefeFreischalten()">Speichern und steckbriefe Freischalten</button>
+
+            <script>
+                function steckbriefeFreischalten() {
+
+                    var user_login = getCookie("login");
+
+                    $.ajax({
+                            type: "POST",
+                            url: "../php/steckbriefeFreischalten.php",
+
+                            data: { user_login: user_login},
+
+                            success: function(response) {
+
+                                console.log(response)
+                                location.reload();
+
+                            },
+                            error: function(error) {
+
+                                console.log(error);
+                            }
+                        });
+                }
+            </script>
+
+            <div style="height: 40px;"></div>
+
+
+            <p id="moderation-text" style="font-weight: 400; font-size: 12px; color: rgb(88, 88, 88);">Man kann jederzeit diese Einstellung wieder ändern.</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div id="steckbriefeBearbeiten">
+
+<!-- 
+
+
+    <div class="main">
+
+
+
+    <h5 class="article-eyebrow">STECKBRIEF FÜR</h5>
+
+    <h1>Timothy Klimke</h1>
+
+
+
+        <p><span class="thick">Bearbeite hier den Steckbrief von Timothy. <br></span>Neben dir dürfen noch Richard, Michel und Dominik an diesem Steckbrief arbeiten.</p>
+        <div style="height: 50px;"></div>
+        <p><span class="thick">Steckbriefe unterstützen keine Live-Mitarbeit. <br></span>Wechselt euch beim schreiben ab.</p>
+
+
+    <div style="height: 100px;"></div>
+
+
+    </div>
+
+    <div style="background-color: rgb(243, 243, 246); padding-top: 100px; padding-bottom: 100px;">
+
+        <div class="main" >
+
+            <div style="display: grid; grid-template-columns: 60% 40%;">
+                <div class="questions" style=" border: 1px solid rgb(123, 123, 128); border-width: 0 1px 0 0; padding-right: 80px;">https://www.apple.com/iphone-15/
+                    <p class="inputTitle">Spitzname</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+        
+        
+                    <p class="inputTitle">Geburtstag</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+
+
+                    <p class="inputTitle">Lieblingsfach</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+
+
+                    <p class="inputTitle">Lieblingslehrer</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+
+
+                    <p class="inputTitle">Leistungskurse</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+
+
+                    <p class="inputTitle">In diesem Fach hatte ich die erste 6</p>
+                    <textarea id="" oninput="autoSize(this)"></textarea>
+                </div>
+
+
+                <div style="padding-left: 100px;">
+                    <p class="img-eyebrow">TITELBILD</p>
+                    <img src="Bilder/Timmy.jpg" style="width: 100%; border-radius: 18px;">
+                    <p style="cursor: pointer;" class="img-eyebrow">BILD ENTFERNEN</p>
+                    <div style="background-color: rgba(228, 228, 234, 0.605); border: 1px solid #C2C2C7; width: 100%; border-radius: 18px; padding: 15px; padding-top: 5px; box-sizing: border-box;">
+                        <p class="img-eyebrow">BILD HOCHLADEN</p>
+                        <p class="img-eyebrow">Empfohlenes Seitenverhätnis: 3 zu 4</p>
+                        <input type="file">
+                    </div>
+
+                    <div style="height: 50px;"></div>
+
+                    <p class="img-eyebrow">WEITERE BILDER</p>
+                
+                    <div style="background-color: rgba(228, 228, 234, 0.605); border: 1px solid #C2C2C7; width: 100%; border-radius: 18px; padding: 15px; padding-top: 5px; box-sizing: border-box;">
+                        <p class="img-eyebrow">BILD HOCHLADEN</p>
+                        <p class="img-eyebrow">Empfohlenes Seitenverhätnis: 3 zu 4</p>
+                        <input type="file">
+                    </div>
+
+
+                </div>
+            </div>
+            
+            
+            
+
+        </div>
+
+    </div>
+    
+</div>-->
+
+
+</div> 
+
+<!--  ///////////////////  FOOTER LIGHT  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-light.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

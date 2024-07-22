@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-startseite.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <link rel="manifest" href="../manifest.json">
+
+    <link rel="apple-touch-icon" href="../images/logo_1024x1024.png">
+    <link rel="apple-touch-startup-image" href="../images/ati_dark.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../moderation";
+        setTimeout(() => {
+            loadSM();
+            loadSL();
+        }, 30);
+
+
+        function bodyReady() {
+
+
+            zeilenTabelleZählenUndDivAktualisieren("storys-count", "storys");
+            zeilenTabelleZählenUndDivAktualisieren("umfragen-count", "umfragen");
+            zeilenTabelleZählenUndDivAktualisieren("rankings-count", "rankings");
+            zeilenTabelleZählenUndDivAktualisieren("abstimmungen-count", "abstimmungen");
+        }
+
+
+    </script>
+</head>
+
+
+
+<body style="margin: 0px;" onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR DARK  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-dark.js"></script>
+<script>loadNav(false, false, true);</script>
+
+
+
+
+<div style="width: 100%; background-color: black; height: 100px;"></div>
+
+<div class="thumbnail">
+    <div class="thumbnail-abi-2025">ABI 2025</div>
+    <div class="thumbnail-abinauten">Abinauten</div>
+    <div class="thumbnail-motto">Keine Überflieger. Trotzdem abgehoben.</div>
+
+    <img class="thumbnail-img" src="../images/Thumbnail-min.png">
+
+
+</div>
+
+<!-- <div class="test123">Test</div> -->
+
+<!-- <div class="steckbriefe" onclick="weiterleiten('../steckbriefe')">
+    <img src="../images/memoji-avatars.jpeg">
+    <div class="steckbriefe-overlay"></div>
+
+    <div class="steckbriefe-text">
+        <div class="steckbriefe-titel">Steckbriefe</div>
+        <div class="steckbriefe-untertitel">Arbeite an Steckbriefen deiner Freunde.</div>
+    </div>   
+    
+    <div class="steckbriefe-cta">
+        <div class="flex-grow"></div>
+        <div class="cta-text-link">Steckbrief Erstellen</div>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+
+    </div>
+</div> -->
+
+<div class="steckbriefeMobileNavigation" onclick="l()">
+<img src="../images/zurück.svg">
+</div>
+    
+<div class="steckbriefeMobileNavigation" style="right: 0;" onclick="r()">
+<img src="../images/weiter.svg">
+</div>
+
+<script>
+    var zoom = 0;
+
+    
+    function r() {
+    if ( zoom+1 < 100 ) {
+        zoom = zoom + 1;
+        document.getElementById("TranformUser").style.transform = "translateX("+zoom*-289+"px)";
+
+        restyleSM();
+    }
+
+    }
+    function l() {
+        if ( zoom > 0 ) {
+            zoom = zoom - 1;
+            document.getElementById("TranformUser").style.transform = "translateX("+zoom*-289+"px)";
+
+            restyleSM();
+        }
+
+    }
+    function restyleSM() {
+        var targetDivs = document.querySelectorAll('.steckbriefeMobileContainer');
+
+        // CSS-Eigenschaften für jedes Element ändern
+        targetDivs.forEach(div => {
+            div.style.opacity = '.33';
+        });
+
+        document.getElementById("SM"+zoom).style.opacity = "1";
+
+
+        targetDivs = document.querySelectorAll('.SM-CTA');
+
+        // CSS-Eigenschaften für jedes Element ändern
+        targetDivs.forEach(div => {
+            div.style.opacity = '0';
+        });
+
+        document.getElementById("SM"+zoom+"-CTA").style.opacity = "1";
+
+
+        targetDivs = document.querySelectorAll('.steckbriefeMobileDots');
+
+        // CSS-Eigenschaften für jedes Element ändern
+        targetDivs.forEach(div => {
+            div.style.backgroundColor = "rgba(0, 0, 0, 0.274)";
+        });
+
+        document.getElementById("SM"+zoom+"-dots").style.backgroundColor = "rgba(0, 0, 0, 1)";
+    }
+
+</script>
+
+<script>
+
+    function loadSM() {
+
+        $.ajax({
+            type: "POST",
+            url: "../php/steckbreifeMobileLaden.php",
+            data: {  },
+            success: function(response) {
+                console.log(response);
+
+                document.getElementById("steckbriefeMobileArea").innerHTML = response;
+                restyleSM();
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function loadSL() {
+
+        $.ajax({
+            type: "POST",
+            url: "../php/steckbreifeLargeLaden.php",
+            data: {  },
+            success: function(response) {
+                console.log(response);
+
+                document.getElementById("steckbriefe").innerHTML = response;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+</script>
+
+<div id="steckbriefeMobileArea" class="steckbriefeMobileArea">
+
+<div id="steckbriefeMobileClip" style="margin-top: 15px; height: 495px; width: 100%; overflow: hidden;">
+<div id="Tranform" style="height: 495px; width: 10000px; transform: translateX(calc(50vw - 137px));">
+
+    <div id="TranformUser" class="TranformUser" style="height: 495px; width: 10000px; transform: translateX(calc(-289px * 0));">
+
+        <div style="height: 495px; width: 1000px;">
+            <div id="SM0" class="steckbriefeMobileContainer" style="opacity: 1; background-image: url('../images/personen/1.jpeg')">
+                <div class="SM-overlay">
+                    <div class="SM-name">RICHARD</div>
+                    <div id="SM0-CTA" class="SM-CTA">
+                        <div class="SM-subtitle">Steckbriefe</div>
+                        <button class="SM-cta-button" onclick="weiterleiten('../steckbriefe')">Jetzt mitmachen</button>
+                    </div>
+                </div>
+            </div>
+            <div id="SM1" class="steckbriefeMobileContainer" style="background-image: url('../images/personen/3.jpeg')">
+                <div class="SM-overlay">
+                    <div class="SM-name">MICHEL</div>
+                    <div id="SM1-CTA" class="SM-CTA" style="opacity: 0;">
+                        <div class="SM-subtitle">Steckbriefe</div>
+                        <button class="SM-cta-button" onclick="weiterleiten('../steckbriefe')">Jetzt mitmachen</button>
+                    </div>
+                </div>
+            </div>
+            <div id="SM2" class="steckbriefeMobileContainer" style="background-image: url('../images/personen/2.jpeg')">
+                <div class="SM-overlay">
+                    <div class="SM-name">TIMMY</div>
+                    <div id="SM2-CTA" class="SM-CTA" style="opacity: 0;">
+                        <div class="SM-subtitle">Steckbriefe</div>
+                        <button class="SM-cta-button" onclick="weiterleiten('../steckbriefe')">Jetzt mitmachen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="steckbriefeMobileDotsContainer" style="height: 8px;">
+    <div id="SM0-dots" style="background-color: black;" class="steckbriefeMobileDots"></div>
+    <div id="SM1-dots" class="steckbriefeMobileDots"></div>
+    <div id="SM2-dots" class="steckbriefeMobileDots"></div>
+</div>
+
+</div>
+
+<div class="steckbriefeLargeArea" style="height: 600px; width: 100%; overflow: hidden; margin-top: 15px;">
+
+    <div style="transform: translateX(calc(50vw - 960px));">
+        <div id="steckbriefe" style="width: 10000px; height: 600px; display: inline-block; min-height: 300px; ">
+
+            <div style="background-image: url('../images/personen/1.jpeg')" class="steckbriefeKontainer"></div>
+            <div style="background-image: url('../images/personen/2.jpeg')" class="steckbriefeKontainer"></div>
+            <div style="background-image: url('../images/personen/3.jpeg')" class="steckbriefeKontainer"></div>
+            <div style="background-image: url('../images/personen/4.jpeg')" class="steckbriefeKontainer"></div>
+            <div style="background-image: url('../images/personen/5.jpeg')" class="steckbriefeKontainer"></div>
+            <div style="background-image: url('../images/personen/6.jpeg')" class="steckbriefeKontainer"></div>
+
+        </div>
+    </div>
+
+    <div class="steckbriefeOverlay"></div>
+
+    <h1 class="steckbriefeTitel">Steckbriefe</h1>
+    <button class="SL-cta-button" onclick="weiterleiten('../steckbriefe')">Jetzt mitmachen</button>
+
+</div>
+
+<script>
+    function divNachLinksVerschieben() {
+        var div = document.getElementById('steckbriefe');
+        var currentPosition = parseInt(div.style.transform.replace('translateX(', '').replace('px)', '')) || 0; // Aktuelle X-Position auslesen (falls vorhanden)
+        var newPosition = currentPosition - 1; // Neue X-Position berechnen (um 1 Pixel nach links)
+        div.style.transform = 'translateX(' + newPosition + 'px)'; // Neue X-Position setzen
+      }
+      
+      // Intervall setzen, um die Funktion ständig aufzurufen
+      setInterval(divNachLinksVerschieben, 20);
+</script>
+
+<div class="kachel-1" onclick="weiterleiten('../zitate')">
+    <h3 style="z-index: 100;">Zitate</h3>
+    <h4>Wir sind gespannt!</h4>
+    <div>
+        <div class="flex-grow"></div>
+        <a>Zitieren</a>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+    </div>
+    <h1 class="trigger" id="zitateTrigger"><span id="zitate-count">0</span> 💬</h1>
+    <h4>Zitate insgesamt</h4>
+</div>
+
+<div class="kachel-2-container">
+
+    <div class="kachel-2" onclick="weiterleiten('../beichten')">
+        <h3>Beichten</h3>
+        <h4>100% Anonym - jetzt oder nie!</h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Beichten</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1 class="trigger" id="beichtenTrigger"><span id="beichten-count">0</span> 🙈</h1>
+        <h4>Beichten insgesamt</h4>
+    </div>
+
+    <div class="kachel-2" onclick="weiterleiten('../storys')">
+        <h3>Storys</h3>
+        <h4>Erzähl uns was!</h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Erzählen</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1 class="trigger" id="storysTrigger"><span id="storys-count">0</span> 📖</h1>
+        <h4>Storys insgesamt</h4>
+    </div>
+
+</div>
+
+
+<script>
+    // Die Liste der Ziel-Divs, die überwacht werden sollen
+    const targets = document.querySelectorAll('.trigger');
+
+    // Die Funktion, die ausgelöst wird, wenn ein Ziel-Div vollständig sichtbar ist
+    const callback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        // Je nach ID des sichtbaren Divs eine entsprechende Funktion aufrufen
+        switch (entry.target.id) {
+            case 'zitateTrigger':
+                zitateTrigger();
+                break;
+            case 'beichtenTrigger':
+                beichtenTrigger();
+                break;
+            case 'storysTrigger':
+                storysTrigger();
+                break;
+            // Füge weitere Cases hinzu, wenn du mehr Divs hast
+        }
+        observer.unobserve(entry.target); // Optional: Beobachtung stoppen, sobald die Bedingung erfüllt ist
+        }
+    });
+    };
+
+    // Ein Intersection Observer erstellen
+    const observer = new IntersectionObserver(callback);
+
+    // Jedes Ziel-Div zur Überwachung hinzufügen
+    targets.forEach(target => {
+    observer.observe(target);
+    });
+
+    // Funktionen, die für jedes sichtbare Div ausgelöst werden sollen
+    function zitateTrigger() {
+        zeilenTabelleZählenUndDivAktualisieren("zitate-count", "zitate");
+        console.log("u");
+    }
+
+    function beichtenTrigger() {
+        zeilenTabelleZählenUndDivAktualisieren("beichten-count", "beichten");
+    }
+
+    function storysTrigger() {
+        zeilenTabelleZählenUndDivAktualisieren("storys-count", "storys");
+    }
+</script>
+
+<div style="height: 200px; width: 100%; overflow: hidden; margin-top: 15px;">
+    <div id="bzs" style="width: calc(415px * 11); height: 30vh; display: inline-block; min-height: 300px;">
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    ••• •••• •••• anime buch aus A1/A2 •••••• ••
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Bueno in Chemie</span><br><br>
+                    Ich habe in der neunten Kla••• •• •
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    Ich habe Bilder ••• ••••••••• ••••• missbrau•••
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Der K••••••••• incident</span><br><br>
+                    In der 9ten wurden in d••• •• •
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    Ich habe heimlich d••• h••••e f••• •• •
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    ••• •••• •••• anime buch aus A1/A2 •••••• ••
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Bueno in Chemie</span><br><br>
+                    Ich habe in der neunten Kla••• •• •
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    Ich habe Bilder ••• ••••••••• ••••• missbrau•••
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Der K••••••••• incident</span><br><br>
+                    In der 9ten wurden in d••• •• •
+                </div>
+            </div>
+        </div>
+        <div class="bzsKontainer">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title">Beichten</span><br><br>
+                    Ich habe heimlich d••• h••••e f••• •• •
+                </div>
+            </div>
+        </div>
+
+        <!-- SCROLL BACK TRIGGER -->
+        <div class="bzsKontainer" id="scrollBackTrigger">
+            <div class="bzsKontainerInner">
+                <div>
+                    <span class="bzs-title"> </span><br><br>
+                     
+                </div>
+            </div>
+        </div>
+
+
+    
+        <script>
+            var dir = -1;
+
+            function divNachLinksVerschieben() {
+                var div = document.getElementById('bzs');
+                var currentPosition = parseInt(div.style.transform.replace('translateX(', '').replace('px)', '')) || 0; // Aktuelle X-Position auslesen (falls vorhanden)
+                var newPosition = currentPosition + dir; // Neue X-Position berechnen (um 1 Pixel nach links)
+                div.style.transform = 'translateX(' + newPosition + 'px)'; // Neue X-Position setzen
+
+                if(newPosition > 0) {
+                    dir = -1;
+                }
+              }
+              
+              // Intervall setzen, um die Funktion ständig aufzurufen
+              setInterval(divNachLinksVerschieben, 15);
+        </script>
+
+
+        <script>
+            // Ziel-Div
+            const targetDiv = document.getElementById('scrollBackTrigger');
+
+            // Intersection Observer erstellen
+            const observerScrollTrigger = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    // Wenn das Ziel-Div im sichtbaren Bereich ist
+                    if (entry.isIntersecting) {
+                        // Hier wird deine Funktion aufgerufen, wenn das Div sichtbar wird
+                        deineFunktion();
+                    }
+                });
+            });
+
+            // Ziel-Div beobachten
+            observerScrollTrigger.observe(targetDiv);
+
+            // Deine Funktion, die jedes Mal ausgelöst wird, wenn das Div sichtbar wird
+            function deineFunktion() {
+                console.log('ScrollBack');
+                dir = 1;
+                }
+        </script>
+    </div>
+</div>
+
+<div class="kachel-1" onclick="weiterleiten('../umfragen')">
+    <h3>Umfragen</h3>
+    <h4></h4>
+    <div>
+        <div class="flex-grow"></div>
+        <a>Leg los</a>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+    </div>
+    <h1><span id="umfragen-count">0</span> 📊</h1>
+    <h4>Umfragen insgesamt</h4>
+</div>
+
+<div class="kachel-2-container">
+
+    <div class="kachel-2" onclick="weiterleiten('../rankings')">
+        <h3>Rankings</h3>
+        <h4></h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Los geht's</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="rankings-count">0</span> 🥇</h1>
+        <h4>Rankings insgesamt</h4>
+    </div>
+
+    <div class="kachel-2" onclick="weiterleiten('../abstimmungen')">
+        <h3>Abstimmungen</h3>
+        <h4></h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Stimm ab</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="abstimmungen-count">0</span> 🗳️</h1>
+        <h4>Abstimmungen insgesamt</h4>
+    </div>
+
+</div>
+
+
+<!-- 
+
+<div class="crush-count" onclick="weiterleiten('../crush-count')">
+    <img src="../images/crush count thumb small.png">
+    <div class="steckbriefe-overlay"></div>
+
+    <div class="steckbriefe-text">
+        <div class="steckbriefe-titel">Crush Count</div>
+        <div class="steckbriefe-untertitel">Eroberer der Herzen.</div>
+    </div>   
+    
+    <div class="steckbriefe-cta">
+        <div class="flex-grow"></div>
+        <div class="cta-text-link">Abstimmen</div>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg" style="z-index: 30;">
+        <div class="flex-grow"></div>
+
+    </div>
+</div>
+
+
+<div style="width: 100%; height: 300px; background: linear-gradient(to bottom, transparent 0%, black 100%); position: absolute; z-index: 10; transform: translateY(-300px);"></div> -->
+
+<div style="height: 100px;"></div>
+
+<!--  ///////////////////  FOOTER LIGHT  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-light.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

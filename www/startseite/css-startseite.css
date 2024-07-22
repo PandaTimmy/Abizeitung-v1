@@ -1,0 +1,637 @@
+@charset "UTF-8";
+@import url("https://fonts.cdnfonts.com/css/helvetica-neue-5");
+body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+.thumbnail {
+  background-color: black;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.thumbnail .thumbnail-abi-2025 {
+  color: #D90000;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.thumbnail .thumbnail-abinauten {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+.thumbnail .thumbnail-motto {
+  padding-top: 24px;
+  color: #FFF;
+  text-align: center;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0 50px;
+}
+@media screen and (max-width: 800px) {
+  .thumbnail .thumbnail-motto {
+    font-size: 24px;
+  }
+}
+.thumbnail .thumbnail-img {
+  width: 100%;
+  min-height: 500px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 60vh;
+  -o-object-position: top;
+     object-position: top;
+  margin: 0 auto;
+  display: block;
+}
+@media screen and (min-width: 800px) {
+  .thumbnail .thumbnail-img {
+    max-width: 800px;
+  }
+}
+@media (max-height: 500px) and (min-height: 60vh) {
+  .thumbnail .thumbnail-img {
+    height: 500px;
+  }
+}
+
+.steckbriefe {
+  cursor: pointer;
+  background-color: black;
+}
+.steckbriefe img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+  display: block;
+  height: 100vh;
+  width: 100%;
+}
+.steckbriefe .steckbriefe-overlay {
+  position: absolute;
+  height: 100vh;
+  background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.63) 51.5%, #000 100%);
+  width: 100%;
+  margin-top: -100vh;
+}
+.steckbriefe .steckbriefe-text {
+  position: absolute;
+  z-index: 20;
+  transform: translateY(-60vh);
+  width: 100%;
+}
+.steckbriefe .steckbriefe-text .steckbriefe-titel {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
+  .steckbriefe .steckbriefe-text .steckbriefe-titel {
+    font-size: 34px;
+  }
+}
+.steckbriefe .steckbriefe-text .steckbriefe-untertitel {
+  color: #FFF;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+@media screen and (max-width: 800px) {
+  .steckbriefe .steckbriefe-text .steckbriefe-untertitel {
+    font-size: 24px;
+  }
+}
+.steckbriefe .steckbriefe-cta {
+  position: absolute;
+  margin-top: -15vh;
+  width: 100%;
+  display: flex;
+  z-index: 20;
+}
+.steckbriefe .steckbriefe-cta img {
+  max-height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.crush-count {
+  cursor: pointer;
+  background-color: black;
+  overflow: hidden;
+}
+.crush-count img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+  display: block;
+  height: 80vh;
+  width: 100%;
+  filter: blur(2px);
+  overflow: hidden;
+}
+.crush-count .steckbriefe-overlay {
+  position: relative;
+  height: 80vh;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.262745098) 0%, rgba(0, 0, 0, 0.081) 25%, rgba(0, 0, 0, 0.165) 51.5%, rgba(0, 0, 0, 0.6666666667) 100%);
+  width: 100%;
+  margin-top: -80vh;
+}
+.crush-count .steckbriefe-text {
+  position: relative;
+  z-index: 20;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateY(-48vh);
+}
+.crush-count .steckbriefe-text .steckbriefe-titel {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
+  .crush-count .steckbriefe-text .steckbriefe-titel {
+    font-size: 34px;
+  }
+}
+.crush-count .steckbriefe-text .steckbriefe-untertitel {
+  color: #FFF;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+@media screen and (max-width: 800px) {
+  .crush-count .steckbriefe-text .steckbriefe-untertitel {
+    font-size: 24px;
+  }
+}
+.crush-count .steckbriefe-cta {
+  position: relative;
+  margin-top: -15vh;
+  width: 100%;
+  display: flex;
+  transform: translateY(-15vh);
+  z-index: 20;
+}
+.crush-count .steckbriefe-cta img {
+  max-height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.kachel-1 {
+  margin-top: 15px;
+  padding: 55px 0 55px 0;
+  background-color: #FAFAFC;
+  text-align: center;
+  cursor: pointer;
+}
+.kachel-1 h3 {
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0;
+  z-index: 20;
+}
+@media (max-width: 700px) {
+  .kachel-1 h3 {
+    font-size: 44px;
+  }
+}
+@media (max-width: 500px) {
+  .kachel-1 h3 {
+    font-size: 36px;
+  }
+}
+.kachel-1 h4 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 18px 15px 0 15px;
+}
+@media (max-width: 700px) {
+  .kachel-1 h4 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 500px) {
+  .kachel-1 h4 {
+    font-size: 24px;
+  }
+}
+.kachel-1 div {
+  margin-top: 18px;
+  display: flex;
+}
+.kachel-1 div a {
+  color: #06C;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.kachel-1 div img {
+  max-height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.kachel-1 h1 {
+  font-size: 128px;
+  font-style: italic;
+  font-weight: 700;
+  margin: 18px 0 0 0;
+}
+@media (max-width: 500px) {
+  .kachel-1 h1 {
+    font-size: 96px;
+  }
+}
+
+.kachel-2-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  padding: 0 15px 0 15px;
+  box-sizing: border-box;
+}
+@media (max-width: 1000px) {
+  .kachel-2-container {
+    grid-template-columns: auto;
+  }
+}
+
+.kachel-2 {
+  margin-top: 15px;
+  padding: 55px 0 55px 0;
+  background-color: #FAFAFC;
+  text-align: center;
+  cursor: pointer;
+}
+.kachel-2 h3 {
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .kachel-2 h3 {
+    font-size: 44px;
+  }
+}
+@media (max-width: 500px) {
+  .kachel-2 h3 {
+    font-size: 36px;
+  }
+}
+.kachel-2 h4 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 18px 15px 0 15px;
+}
+@media (max-width: 700px) {
+  .kachel-2 h4 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 500px) {
+  .kachel-2 h4 {
+    font-size: 24px;
+  }
+}
+.kachel-2 div {
+  margin-top: 18px;
+  display: flex;
+}
+.kachel-2 div a {
+  color: #06C;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.kachel-2 div img {
+  max-height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.kachel-2 h1 {
+  font-size: 128px;
+  font-style: italic;
+  font-weight: 700;
+  margin: 18px 0 0 0;
+}
+@media (max-width: 500px) {
+  .kachel-2 h1 {
+    font-size: 96px;
+  }
+}
+
+.cta-text-link {
+  color: #06C;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.moderation {
+  position: absolute;
+  padding: 0;
+  box-sizing: border-box;
+  translate: 0px 10px;
+  width: 100%;
+  z-index: 20;
+}
+.moderation button {
+  background-color: rgba(0, 0, 0, 0);
+  display: block;
+  color: rgb(0, 102, 204);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  border: 0;
+  margin: 0 auto 0 auto;
+  padding: 18px 50px 20px 30px;
+  border-radius: 30px;
+  height: 63px;
+  display: flex;
+}
+.moderation button img {
+  max-height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.test123 {
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+  -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+          mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  z-index: 10;
+  translate: 0 -350px;
+}
+
+picture {
+  position: relative;
+  width: 90vw;
+  height: auto;
+  margin: 10vh;
+  z-index: 10;
+}
+picture::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  -webkit-mask-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 40%, rgb(0, 0, 0) 60%, rgb(0, 0, 0) 100%);
+          mask-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 40%, rgb(0, 0, 0) 60%, rgb(0, 0, 0) 100%);
+}
+picture img {
+  width: inherit;
+  height: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.steckbriefeKontainer {
+  height: 600px;
+  float: left;
+  background-size: cover;
+  background-position-y: 50%;
+  background-position-x: 50%;
+  width: 400px;
+  min-width: 214px;
+  margin-right: 15px;
+}
+
+.steckbriefeOverlay {
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.665), rgba(0, 0, 0, 0.295), rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0));
+  margin-top: -600px;
+}
+
+.bzsKontainer {
+  height: 200px;
+  float: left;
+  background-size: cover;
+  background-position-y: 50%;
+  background-position-x: 50%;
+  width: 400px;
+  padding-right: 15px;
+}
+.bzsKontainer .bzsKontainerInner {
+  width: 100%;
+  background-color: #FAFAFC;
+  display: flex;
+  justify-content: center; /* Horizontale Ausrichtung in der Mitte */
+  align-items: center; /* Vertikale Ausrichtung in der Mitte */
+  height: 200px; /* Ändere dies je nach Bedarf */
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.bzs-title {
+  font-size: 24px;
+  margin-bottom: 70px;
+}
+
+.steckbriefeMobileContainer {
+  float: left;
+  background-size: cover;
+  background-position-y: 50%;
+  background-position-x: 50%;
+  margin-right: 15px;
+  height: 495px;
+  width: 274px;
+  transition: all 0.6s ease-in-out;
+  opacity: 0.33;
+}
+.steckbriefeMobileContainer .SM-overlay {
+  height: 495px;
+  width: 274px;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.48));
+  box-sizing: border-box;
+  clear: both; /* Clear-Regel hinzufügen */
+  overflow: auto; /* Overflow hinzufügen, um Floats zu klären */
+}
+.steckbriefeMobileContainer .SM-overlay .SM-name {
+  width: 274px;
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-top: 40px;
+  height: 36px;
+  box-sizing: border-box;
+}
+.steckbriefeMobileContainer .SM-overlay .SM-CTA {
+  transition: all 0.6s ease-in-out;
+}
+.steckbriefeMobileContainer .SM-overlay .SM-CTA .SM-subtitle {
+  width: 274px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  margin-top: 305px;
+}
+.steckbriefeMobileContainer .SM-overlay .SM-CTA .SM-cta-button {
+  padding: 10px 15px 10px 15px;
+  background-color: white;
+  color: #000;
+  border: none;
+  font-size: 14px;
+  margin: 15px auto 0 auto;
+  border-radius: 37px;
+  display: block;
+}
+
+.steckbriefeMobileNavigation {
+  height: 495px;
+  width: 20vw;
+  position: absolute;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+@media (max-width: 1000px) {
+  .steckbriefeMobileNavigation {
+    display: flex;
+  }
+}
+.steckbriefeMobileNavigation img {
+  width: 30px;
+  display: block;
+}
+
+.TranformUser {
+  transition: all 0.6s cubic-bezier(0.26, 0, 0.25, 0.99);
+}
+
+.steckbriefeMobileDots {
+  width: 8px;
+  height: 8px;
+  margin: 0 7px 0 7px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.274);
+  transition: all 0.6s ease-in-out;
+}
+
+.steckbriefeMobileDotsContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 17px;
+  height: 8px;
+}
+
+.steckbriefeMobileArea {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .steckbriefeMobileArea {
+    display: block;
+  }
+}
+
+.steckbriefeLargeArea {
+  display: block;
+}
+@media (max-width: 1000px) {
+  .steckbriefeLargeArea {
+    display: none;
+  }
+}
+.steckbriefeLargeArea .SL-cta-button {
+  padding: 10px 15px 10px 15px;
+  background-color: white;
+  color: #000;
+  border: none;
+  font-size: 14px;
+  margin: 0 auto 0 auto;
+  border-radius: 37px;
+  display: block;
+  transform: translateY(-210px);
+}
+.steckbriefeLargeArea .steckbriefeTitel {
+  color: #FFF;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  transform: translateY(-190px);
+}/*# sourceMappingURL=css-startseite.css.map */

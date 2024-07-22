@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-storys.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/storysZurücksetzen.js"></script>
+    <script src="../javascript/storyFavorisieren.js"></script>
+    <script src="../javascript/storyLöschen.js"></script>
+    <script src="../javascript/storysLaden.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+
+    <script>
+        const modusWechselURL = "../storys";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+        if (getCookie("login") != "Admin") {
+            weiterleiten("../storys");
+        }
+
+        function bodyReady() {
+            storysLaden(getCookie("login"));
+            zeilenTabelleZählenUndDivAktualisieren("storys-count", "storys", true);
+
+        }
+
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+<!--  ///////////////////  NAVBAR DARK  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-dark.js"></script>
+<script>loadNav(false, false);</script>
+
+
+
+<div style="height: 100px;"></div>
+
+<div class="main">
+
+    <div class="title">
+        <h1>Storys Moderieren</h1>
+        <h2 style="cursor: pointer;" onclick="weiterleiten('../moderation')">Fertig</h2>
+    </div>
+
+    <h3 id="storys-favs" style="display: none;">Storys<span class="h3-light"> - Favorisiert</span></h3>
+
+    <div id="storys-favoriten" class="storys-container"></div>
+
+    <h3>Alle Storys <span class="h3-light">(<span id="storys-count">0</span>)</span></h3>
+
+    <div id="storys-alle" class="storys-container"></div>
+
+</div>
+
+
+<div style="height: 100px;"></div>
+
+<!--  ///////////////////  FOOTER DARK  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-dark.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

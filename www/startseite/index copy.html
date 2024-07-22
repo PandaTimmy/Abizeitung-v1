@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-startseite.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <link rel="manifest" href="../manifest.json">
+
+    <link rel="apple-touch-icon" href="../images/logo_1024x1024.png">
+    <link rel="apple-touch-startup-image" href="../images/ati_dark.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="../javascript/navbar.js"></script>
+    <script src="../javascript/hashZuBenutzername.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+
+
+    <script>
+
+        function bodyReady() {
+
+            if (getCookie("login") == "") {
+
+                document.getElementById("anmelden-cta").style.display = "block";
+                console.log("test");
+
+            }
+            else {
+
+                moderationsLinksZeigen(getCookie("login"), "moderation-cta");
+            }           
+
+            zeilenTabelleZählenUndDivAktualisieren("zitate-count", "zitate");
+            zeilenTabelleZählenUndDivAktualisieren("beichten-count", "beichten");
+            zeilenTabelleZählenUndDivAktualisieren("storys-count", "storys");
+            zeilenTabelleZählenUndDivAktualisieren("umfragen-count", "umfragen");
+            zeilenTabelleZählenUndDivAktualisieren("rankings-count", "rankings");
+            zeilenTabelleZählenUndDivAktualisieren("abstimmungen-count", "abstimmungen");
+        }
+
+
+    </script>
+</head>
+
+
+
+<body style="margin: 0px;" onload="bodyReady()">
+
+
+<div class="navbar">
+
+    <div id="ajax-data-output" style="display: none;">
+        <div id="var1"></div>
+        <div id="var2"></div>
+        <div id="var3"></div>
+        <div id="var4"></div>
+        <div id="var5"></div>
+        <div id="var6"></div>
+        <div id="var7"></div>
+        <div id="var8"></div>
+        <div id="var9"></div>
+        <div id="var10"></div>
+        <div id="var11"></div>
+        <div id="var12"></div>
+        <div id="var13"></div>
+        <div id="var14"></div>
+        <div id="var15"></div>
+        <div id="var16"></div>
+        <div id="var17"></div>
+        <div id="var18"></div>
+        <div id="var19"></div>
+        <div id="var20"></div>
+    </div>
+
+    <div class="navbarcontainer">
+        <img src="../images/logo-dark.png" class="navbar-logo" onclick="weiterleiten('../startseite')">
+
+        <div onclick="weiterleiten('../steckbriefe')">Steckbriefe</div>
+        <div onclick="weiterleiten('../beichten')">Beichten</div>
+        <div onclick="weiterleiten('../zitate')">Zitate</div>
+        <div onclick="weiterleiten('../storys')">Storys</div>
+        <div onclick="weiterleiten('../umfragen')">Umfragen</div>
+        <div onclick="weiterleiten('../rankings')">Rankings</div>
+        <div onclick="weiterleiten('../abstimmungen')">Abstimmungen</div>
+        <div onclick="weiterleiten('../crush-count')">Crush Count</div>
+
+        <img src="../images/navbar-profile-dark.svg" class="navbar-profile" onclick="weiterleiten('../konto')">
+    </div>
+    
+</div>
+
+<div class="navbar-mobile" id="navbar-mobile">
+    <img src="../images/logo-dark.png" class="navbar-logo-mobile" onclick="weiterleiten('../startseite')">
+
+    <div class="navbar-mobile-open" id="navbar-mobile-open">
+        <img src="../images/navbar-mobile-open-dark.svg">
+    </div>
+
+    <div class="navbar-mobile-close" id="navbar-mobile-close" onclick="toggleNavbarMobile()">
+        <img src="../images/navbar-mobile-close-dark.svg">
+    </div>
+
+    <ul>
+        <li id="navbar-mobile-element-1" onclick="weiterleiten('../steckbriefe')">
+            Steckbriefe
+        </li>
+        <li id="navbar-mobile-element-2" onclick="weiterleiten('../zitate')">
+            Zitate
+        </li>
+        <li id="navbar-mobile-element-3" onclick="weiterleiten('../beichten')">
+            Beichten
+        </li>
+        <li id="navbar-mobile-element-4" onclick="weiterleiten('../storys')">
+            Storys
+        </li>
+        <li id="navbar-mobile-element-5" onclick="weiterleiten('../umfragen')">
+            Umfragen
+        </li>
+        <li id="navbar-mobile-element-6" onclick="weiterleiten('../rankings')">
+            Rankings
+        </li>
+        <li id="navbar-mobile-element-7" onclick="weiterleiten('../abstimmungen')">
+            Abstimmungen
+        </li>
+        <li id="navbar-mobile-element-8" onclick="weiterleiten('../crush-count')">
+            Crush Count
+        </li>
+        <li id="navbar-mobile-element-9" onclick="weiterleiten('../konto')">
+            Konto
+        </li>
+        
+    </ul>
+
+    
+    
+</div>
+
+<div style="width: 100vw; background-color: black; height: 100px;"></div>
+
+<div class="thumbnail">
+    <div class="thumbnail-abi-2025">ABI 2025</div>
+    <div class="thumbnail-abinauten">Abinauten</div>
+    <div class="thumbnail-motto">Keine Überflieger. Trotzdem abgehoben.</div>
+
+    <img class="thumbnail-img" src="../images/Thumbnail-min.png">
+
+
+</div>
+
+<div class="test123">Test</div>
+
+
+<div class="moderation" id="anmelden-cta" style="display: none;"><button onclick="weiterleiten('../anmelden')"><span>Anmelden</span><img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg"></button></div>
+
+<div class="moderation" id="moderation-cta" style="display: none;"><button onclick="weiterleiten('../moderation')"><span>Moderationsseite</span><img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg"></button></div>
+
+<div class="steckbriefe" onclick="weiterleiten('../steckbriefe')">
+    <img src="../images/memoji-avatars.jpeg">
+    <div class="steckbriefe-overlay"></div>
+
+    <div class="steckbriefe-text">
+        <div class="steckbriefe-titel">Steckbriefe</div>
+        <div class="steckbriefe-untertitel">Arbeite an Steckbriefen deiner Freunde.</div>
+    </div>   
+    
+    <div class="steckbriefe-cta">
+        <div class="flex-grow"></div>
+        <div class="cta-text-link">Steckbrief Erstellen</div>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+
+    </div>
+</div>
+
+<div class="test123">Test</div>
+
+
+
+<div class="crush-count" onclick="weiterleiten('../crush-count')">
+    <img src="../images/crush count thumb small.png">
+    <div class="steckbriefe-overlay"></div>
+
+    <div class="steckbriefe-text">
+        <div class="steckbriefe-titel">Crush Count</div>
+        <div class="steckbriefe-untertitel">Eroberer der Herzen.</div>
+    </div>   
+    
+    <div class="steckbriefe-cta">
+        <div class="flex-grow"></div>
+        <div class="cta-text-link">Abstimmen</div>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+
+    </div>
+</div>
+
+<div class="test123">Test</div>
+
+<div style="height: 100px;"></div>
+
+<div class="kachel-1" onclick="weiterleiten('../zitate')">
+    <h3 style="z-index: 100;">Zitate</h3>
+    <h4>Wir sind gespannt!</h4>
+    <div>
+        <div class="flex-grow"></div>
+        <a>Zitieren</a>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+    </div>
+    <h1><span id="zitate-count">0</span> 💬</h1>
+    <h4>Zitate insgesamt</h4>
+</div>
+
+<div class="kachel-2-container">
+
+    <div class="kachel-2" onclick="weiterleiten('../beichten')">
+        <h3>Beichten</h3>
+        <h4>100% Anonym - jetzt oder nie!</h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Beichten</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="beichten-count">0</span> 🙈</h1>
+        <h4>Beichten insgesamt</h4>
+    </div>
+
+    <div class="kachel-2" onclick="weiterleiten('../storys')">
+        <h3>Storys</h3>
+        <h4>Erzähl uns was!</h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Erzählen</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="storys-count">0</span> 📖</h1>
+        <h4>Storys insgesamt</h4>
+    </div>
+
+</div>
+
+<div class="kachel-1" onclick="weiterleiten('../umfragen')">
+    <h3>Umfragen</h3>
+    <h4></h4>
+    <div>
+        <div class="flex-grow"></div>
+        <a>Leg los</a>
+        <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+        <div class="flex-grow"></div>
+    </div>
+    <h1><span id="umfragen-count">0</span> 📊</h1>
+    <h4>Umfragen insgesamt</h4>
+</div>
+
+<div class="kachel-2-container">
+
+    <div class="kachel-2" onclick="weiterleiten('../rankings')">
+        <h3>Rankings</h3>
+        <h4></h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Los geht's</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="rankings-count">0</span> 🥇</h1>
+        <h4>Rankings insgesamt</h4>
+    </div>
+
+    <div class="kachel-2" onclick="weiterleiten('../abstimmungen')">
+        <h3>Abstimmungen</h3>
+        <h4></h4>
+        <div>
+            <div class="flex-grow"></div>
+            <a>Stimm ab</a>
+            <img style="max-width: 20px; object-fit: contain;" src="../images/cta-link.svg">
+            <div class="flex-grow"></div>
+        </div>
+        <h1><span id="abstimmungen-count">0</span> 🗳️</h1>
+        <h4>Abstimmungen insgesamt</h4>
+    </div>
+
+</div>
+
+<div class="footer">
+        <div class="footer-text">Titelbild Astronaut 3D-Modell: "Space X Dragon Suit" (https://skfb.ly/6xnF9) by Diuis is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</div>
+        <br>
+        <div class="footer-links">
+            <a>Über</a>
+            <div class="footer-link-space">|</div>
+            <a>Datenschutzrichtlinie</a>
+            <div class="footer-link-space">|</div>
+            <a>Verwendung von Cookies</a>
+            <div class="footer-link-space">|</div>
+            <a>Rechtliche Hinweise</a>
+        </div>
+    
+
+</div>
+
+</body>
+</html>

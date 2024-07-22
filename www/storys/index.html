@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-storys.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="../javascript/storyAbschicken.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../storys-moderieren";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+        zeilenTabelleZählenUndDivAktualisieren("infobox-story-counter", "storys");
+
+        moderationsLinksZeigen(getCookie("login"), "moderation");
+
+    </script>
+
+</head>
+
+
+
+<body>
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+<script>loadNav(false, false);</script>
+
+
+<div class="top-spacing-1"></div>
+
+<div class="main">
+
+    <div class="main-grid">
+        <div>
+            <h2>Storys</h2>
+            <p>Ey, hast du krasse Stories aus der Schule? Drop sie hier! Lass uns zusammen lachen, abchecken und abfeiern, was das Schul-Leben so unique macht. Schick uns deine Story und sei Teil des Hypes! 💥💥💥</p>
+
+
+            <div style="margin-top: 64px;">
+                <label id="inputTitleLabel">Titel</label>
+
+                <input id="inputTitle" onfocus="labelAnimationFocus('inputTitle','inputTitleLabel')" onblur="labelAnimationFocusOut('inputTitle','inputTitleLabel')">
+            </div>
+
+            <div style="margin-top: 15px;">  
+                <label id="inputStoryLabel">Story</label>
+
+                <textarea id="inputStory" onfocus="labelAnimationFocus('inputStory','inputStoryLabel')" onblur="labelAnimationFocusOut('inputStory','inputStoryLabel')"></textarea>
+            </div>
+
+            <div id="storyAbschickenKnopf">
+
+                <button style="margin-top: 64px;" onclick="storyAbschicken(getCookie('login'),document.getElementById('inputTitle').value+' ☼'+document.getElementById('inputStory').value)">Story senden</button>
+
+            </div>
+            <div id="response"></div>
+
+        </div>
+
+        <script>
+
+            function labelAnimationFocus(inputid,labelid) {
+
+                document.getElementById(labelid).style.marginTop = "10px";
+                document.getElementById(labelid).style.fontSize = "12px";
+            }
+
+            function labelAnimationFocusOut(inputid,labelid) {
+
+            if (document.getElementById(inputid).value == "") {
+                document.getElementById(labelid).style.marginTop = "18px";
+                document.getElementById(labelid).style.fontSize = "17px";
+            }
+            }
+
+
+        </script>
+
+        <div>
+            <div class="infobox" id="moderation" style="display: none;">
+                <h5>Moderieren</h5>
+
+                <a onclick="weiterleiten('../storys-moderieren')">Storys moderieren<img class="cta-link-img" src="../images/cta-link.svg"></a>
+                <a onclick="weiterleiten('../moderation')">Moderationsseite öffnen<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+
+            <div class="infobox">
+                <h1><span id="infobox-story-counter">0</span>🔥</h1>
+                <p style="text-align: center; margin-top: 0;">Storys insgesamt</p>
+            </div>
+
+            <div class="infobox">
+                <h5>Anonym</h5>
+                <p>Niemand wird wissen können, wer diese Story geschrieben hat. Nicht einmal das Abizeitungskomitee.</p>
+            </div>
+
+            <div class="infobox">
+                <h5>Fragen</h5>
+
+                <a onclick="">Chatte mit dem Abizeitungskomitee<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+
+            
+        </div>
+    </div>
+
+</div>
+
+
+<div class="footer">
+
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

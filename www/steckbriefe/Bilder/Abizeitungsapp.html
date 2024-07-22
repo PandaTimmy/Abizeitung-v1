@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-steckbriefe.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/ausloggen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/steckbrief-zugriffe-laden.js"></script>
+
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+        var user_login = getCookie("login");
+
+
+        function autoSize(textarea) {
+            textarea.style.height = 'auto'; // Zurücksetzen auf automatische Höhe
+            textarea.style.height = (textarea.scrollHeight + 2) + 'px'; // Anpassen der Höhe
+        }
+
+        function frageHinzu(user_login) {
+                $.ajax({
+                    type: "POST",
+                    url: "../php/steckbriefe-frage-hinzu.php",
+
+                    data: { user_login: user_login },
+
+                    success: function(response) {
+
+                        console.log(response);
+
+                        fragenLaden(user_login);
+
+                    },
+                    error: function(error) {
+
+                        console.log(error);
+                    }
+                });
+                
+            }
+
+        
+        function frageBewegen(id) {
+
+            frageSpeichern(id);
+
+            var user_login = getCookie("login");
+            console.log(id);
+
+            $.ajax({
+                type: "POST",
+                url: "../php/steckbriefeFrageVerschieben.php",
+
+                data: { user_login: user_login, id: id },
+
+                success: function(response) {
+
+                    console.log(response);
+
+                    fragenLaden(user_login, id);
+
+                },
+                error: function(error) {
+
+                    console.log(error);
+                }
+            }); 
+        }
+
+        function frageSpeichern(id) {
+            frage = document.getElementById("ta"+id).value;
+            $.ajax({
+                type: "POST",
+                url: "../php/steckbriefeFrageSpeichern.php",
+
+                data: { user_login: user_login, id: id, frage: frage },
+
+                success: function(response) {
+
+                    console.log(response);
+
+
+                },
+                error: function(error) {
+
+                    console.log(error);
+                }
+            }); 
+
+        }
+
+        function frageLöschen(id) {
+            $.ajax({
+                type: "POST",
+                url: "../php/steckbriefeFrageLöschen.php",
+
+                data: { user_login: user_login, id: id },
+
+                success: function(response) {
+
+                    console.log(response);
+                    fragenLaden(user_login, (id*-1));
+
+
+                },
+                error: function(error) {
+
+                    console.log(error);
+                }
+            }); 
+
+        }
+        
+        function fragenLaden(user_login, idAnimate) {
+            $.ajax({
+                type: "POST",
+                url: "../php/steckbriefeFragenLaden.php",
+
+                data: { user_login: user_login },
+
+                success: function(response) {
+
+                    console.log(response);
+
+                    var fragen = response.split("☾");   
+                    fragen = fragen.slice(1);
+
+                    document.getElementById("fragen").innerHTML = "";
+
+                    for (var i = 0; i < fragen.length; i++) {
+
+                        frage = fragen[i].split("✩")[0];
+                        id = fragen[i].split("✩")[1];
+
+                        var move = 0;
+
+                        if(id > idAnimate && idAnimate != 0) {
+                            move = -124;
+
+                            if(id > (idAnimate+1)) {
+                                move = 0;
+                            }
+                        }
+                        if(id == idAnimate && idAnimate != 0) {
+                            move = 124;
+                        }
+
+                        if( idAnimate < 0 ) {
+                            if(id >= (idAnimate*-1)) {
+                            move = 124;
+
+                            document.getElementById("addQButton").style.transition = "none";
+
+                            document.getElementById("addQButton").style.transform = "translateY(124px)";
+                        }
+                        }
+
+                        document.getElementById("fragen").innerHTML += '<div class="q" id="'+id+'" style="transition: transform .3s ease-in-out; transform: translate(0px, '+move+'px)"><p class="inputTitle">Frage '+(id)+' <span style="opacity: 1; float: right; transform: translateX(-20px); height: 0px; font-size: 16px;"><span style="cursor: pointer;" onclick="frageBewegen('+(id-1)+')">⬆</span><span style="margin-left: 10px; cursor: pointer;" onclick="frageBewegen('+(id)+')">⬇</span><span style="margin-left: 10px; cursor: pointer;" onclick="frageLöschen('+(id)+')">🗑️</span></span></p><textarea onblur="frageSpeichern('+(id)+')" id="ta'+id+'" oninput="autoSize(this)">'+frage+'</textarea></div>';
+
+                    }
+
+                    setTimeout(() => {
+
+
+                        var qDivs = document.querySelectorAll('.q');
+
+                        // Durch jedes ausgewählte Element iterieren und transform setzen
+                        qDivs.forEach(function(div) {
+                        div.style.transform = 'translateY(0)';
+                        document.getElementById("addQButton").style.transition = "all .3s ease-in-out";
+
+                        });
+                    }, 10);
+
+                },
+                error: function(error) {
+
+                    console.log(error);
+                }
+            }); 
+        }
+
+        function bodyReady() {
+
+            fragenLaden(user_login, 0);
+
+
+        }
+
+
+    </script>
+
+
+
+    <style>
+        .load {
+        --uib-size: 35px;
+        --uib-color: black;
+        --uib-speed: 1.5s;
+        --uib-dot-size: calc(var(--uib-size) * 0.4);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--uib-dot-size);
+        width: var(--uib-size);
+        margin: 0 auto 0 auto;
+        }
+    
+        .load::before,
+        .load::after {
+        content: '';
+        position: absolute;
+        height: var(--uib-dot-size);
+        width: var(--uib-dot-size);
+        border-radius: 50%;
+        background-color: var(--uib-color);
+        flex-shrink: 0;
+        transition: background-color 0.3s ease;
+        }
+    
+        .load::before {
+        animation: orbit var(--uib-speed) linear infinite;
+        }
+    
+        .load::after {
+        animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
+        }
+    
+        @keyframes orbit {
+        0% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        5% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        10% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        15% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        20% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        25% {
+            transform: translateX(0%) scale(0.47368);
+            opacity: 0.3;
+        }
+        30% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312);
+            opacity: 0.37;
+        }
+        35% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944);
+            opacity: 0.44;
+        }
+        40% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576);
+            opacity: 0.51;
+        }
+        45% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208);
+            opacity: 0.58;
+        }
+        50% {
+            transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        55% {
+            transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        60% {
+            transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        65% {
+            transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        70% {
+            transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        75% {
+            transform: translateX(0%) scale(1);
+            opacity: 1;
+        }
+        80% {
+            transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368);
+            opacity: 0.93;
+        }
+        85% {
+            transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736);
+            opacity: 0.86;
+        }
+        90% {
+            transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104);
+            opacity: 0.79;
+        }
+        95% {
+            transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472);
+            opacity: 0.72;
+        }
+        100% {
+            transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+            opacity: 0.65;
+        }
+        }
+    </style>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+
+
+
+<div style="height: 100px;"></div>
+<div style="height: 7.5vw;"></div>
+
+
+<div id="steckbriefeMain">
+
+
+<div class="main">
+
+
+    <h5 class="article-eyebrow">EINSTELLUNGEN</h5>
+
+    <h1 style="z-index: 99;">Steckbriefe</h1>
+
+
+        <p id="moderation-text"><span class="thick"></span>Stelle hier ein, was für Fragen bei den Steckbriefen ausgefüllt werden sollen.</p>
+
+
+    <div style="height: 100px;"></div>
+
+    <div id="fragen"></div>
+
+    <button id="addQButton" class="addQ q" style="transition: transform .3s ease-in-out;" onclick="frageHinzu(getCookie('login'));">Frage hinzufügen</button>
+
+    <div style="height: 224px;"></div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="footer" style="margin-top: 0;">
+
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

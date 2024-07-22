@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-steckbriefe.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/ausloggen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/steckbrief-zugriffe-laden.js"></script>
+
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+
+        function bodyReady() {
+            
+            setTimeout(() => {
+                
+            }, 0);
+
+        }
+
+
+    </script>
+
+
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+
+
+
+<div style="height: 100px;"></div>
+<div style="height: 7.5vw;"></div>
+
+
+
+<div class="main">
+
+
+    <h5 class="article-eyebrow">IN DIE SQL DATENBANK HOCHLADEN</h5>
+
+    <h1 style="z-index: 99;">Datei Upload</h1>
+
+
+
+    <div style="height: 50px;"></div>
+
+    <div style="background-color: rgba(194, 194, 199, 0.157); border: .5px solid rgb(194, 194, 199); border-radius: 12px; padding: 16px 16px 16px 16px; max-width: 400px;">
+
+        <span class="article-eyebrow">DATEI HOCHLADEN</span><br>
+    
+    <input id="fileInput" type="file" style="margin-top: 10px;" onchange="dateiHochladen()">
+
+        <div id="result"></div>
+
+    <script>
+
+
+
+function dateiHochladen() {
+
+    // Dateiinputfeld auswählen
+    var dateiInput = document.getElementById("fileInput").files[0];
+
+    // Weitere Variablen hinzufügen
+    var name = "Datei1";
+    var benutzer = "KlimkeTim";
+    var pfad = "Datei1";
+
+    // FormData-Objekt erstellen und Datei sowie weitere Variablen hinzufügen
+    var formData = new FormData();
+    formData.append('datei', dateiInput);
+    formData.append('name', name);
+    formData.append('benutzer', benutzer);
+    formData.append('pfad', pfad);
+
+    // Ajax-Anfrage senden
+    $.ajax({
+        type: "POST",
+        url: "../php/upload.php",
+        data: formData,
+        processData: false, // Wichtig, damit jQuery die FormData nicht in eine Zeichenfolge konvertiert
+        contentType: false, // Wichtig, damit jQuery den richtigen Content-Type setzt
+        success: function(response) {
+            console.log(response);
+
+            document.getElementById("result").innerHTML = response;
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+
+    }
+
+
+</script>
+
+    
+    </div>
+    
+
+
+    <div style="height: 100px;"></div>
+
+</div>
+
+<div class="footer" style="margin-top: 0;">
+
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

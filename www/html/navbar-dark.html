@@ -1,0 +1,67 @@
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/weiterleiten.js"></script>
+
+<div class="navbar">
+
+    <div class="navbarcontainer">
+        <img src="../images/logo-dark.png" class="navbar-logo" onclick="weiterleiten('../startseite')">
+
+        <div onclick="weiterleiten('../steckbriefe')">Steckbriefe</div>
+        <div onclick="weiterleiten('../zitate')">Zitate</div>
+        <div onclick="weiterleiten('../beichten')">Beichten</div>
+        <div onclick="weiterleiten('../storys')">Storys</div>
+        <div onclick="weiterleiten('../umfragen')">Umfragen</div>
+        <div onclick="weiterleiten('../rankings')">Rankings</div>
+        <div onclick="weiterleiten('../abstimmungen')">Abstimmungen</div>
+        <!-- <div onclick="weiterleiten('../crush-count')">Crush Count</div> -->
+
+        <img src="../images/navbar-profile-dark.svg" class="navbar-profile" onclick="weiterleiten('../konto')">
+    </div>
+    
+</div>
+
+<div class="navbar-mobile" id="navbar-mobile">
+    <img src="../images/logo-dark.png" class="navbar-logo-mobile" onclick="weiterleiten('../startseite')">
+
+    <div class="navbar-mobile-open" id="navbar-mobile-open">
+        <img src="../images/navbar-mobile-open-dark.svg">
+    </div>
+
+    <div class="navbar-mobile-close" id="navbar-mobile-close" onclick="toggleNavbarMobile()">
+        <img src="../images/navbar-mobile-close-dark.svg">
+    </div>
+
+    <ul>
+        <li id="navbar-mobile-element-1" onclick="weiterleiten('../steckbriefe')">
+            Steckbriefe
+        </li>
+        <li id="navbar-mobile-element-2" onclick="weiterleiten('../zitate')">
+            Zitate
+        </li>
+        <li id="navbar-mobile-element-3" onclick="weiterleiten('../beichten')">
+            Beichten
+        </li>
+        <li id="navbar-mobile-element-4" onclick="weiterleiten('../storys')">
+            Storys
+        </li>
+        <li id="navbar-mobile-element-5" onclick="weiterleiten('../umfragen')">
+            Umfragen
+        </li>
+        <li id="navbar-mobile-element-6" onclick="weiterleiten('../rankings')">
+            Rankings
+        </li>
+        <li id="navbar-mobile-element-7" onclick="weiterleiten('../abstimmungen')">
+            Abstimmungen
+        </li>
+        <!-- <li id="navbar-mobile-element-8" onclick="weiterleiten('../crush-count')">
+            Crush Count
+        </li> -->
+        <li id="navbar-mobile-element-8" onclick="weiterleiten('../konto')">
+            Konto
+        </li>
+        
+    </ul>
+
+    
+    
+</div>

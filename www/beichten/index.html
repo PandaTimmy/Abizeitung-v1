@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="../manifest LIGHT.json">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-beichten.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../javascript/beichteAbschicken.js"></script>
+    <script src="../javascript/beichteLöschen.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+
+
+    <script>
+        const modusWechselURL = "../beichten-moderieren";
+
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+        zeilenTabelleZählenUndDivAktualisieren("infobox-beichte-counter", "beichten");
+
+        moderationsLinksZeigen(getCookie("login"), "moderation");
+
+    </script>
+
+</head>
+
+
+
+<body>
+
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+<script>loadNav(false, false);</script>
+
+
+
+
+<div class="top-spacing-1"></div>
+
+<div class="main">
+
+    <div class="main-grid">
+        <div>
+            <h2>Beichten</h2>
+            <p>Zeig uns deine lustige Seite! 😄 Schick uns deine wildesten Schulmomente – anonym und ohne Filter.<br><br>Was bleibt in der Schule schon geheim? 🤫 Los geht's!</p>
+
+
+            <div style="margin-top: 64px;">
+                <label id="inputAuthorLabel">Autor (optional)</label>
+
+                <input id="inputAuthor" onfocus="labelAnimationFocus('inputAuthor','inputAuthorLabel')" onblur="labelAnimationFocusOut('inputAuthor','inputAuthorLabel')">
+            </div>
+
+            <div style="margin-top: 15px;">  
+                <label id="inputBeichteLabel">Deine Beichte</label>
+
+                <textarea id="inputBeichte" type="password" onfocus="labelAnimationFocus('inputBeichte','inputBeichteLabel')" onblur="labelAnimationFocusOut('inputBeichte','inputBeichteLabel')"></textarea>
+            </div>
+
+            <div id="beichteAbschickenKnopf">
+
+                <button style="margin-top: 64px;" onclick="beichteAbschicken(getCookie('login'),document.getElementById('inputAuthor').value+' ☼'+document.getElementById('inputBeichte').value)">Beichte senden</button>
+
+            </div>
+            <div id="response"></div>
+
+        </div>
+
+        <script>
+
+            function labelAnimationFocus(inputid,labelid) {
+
+                document.getElementById(labelid).style.marginTop = "10px";
+                document.getElementById(labelid).style.fontSize = "12px";
+            }
+
+            function labelAnimationFocusOut(inputid,labelid) {
+
+            if (document.getElementById(inputid).value == "") {
+                document.getElementById(labelid).style.marginTop = "18px";
+                document.getElementById(labelid).style.fontSize = "17px";
+            }
+            }
+
+
+        </script>
+
+        <div>
+            <div class="infobox" id="moderation" style="display: none;">
+                <h5>Moderieren</h5>
+
+                <a onclick="weiterleiten('../beichten-moderieren')">Beichten moderieren<img class="cta-link-img" src="../images/cta-link.svg"></a>
+                <a onclick="weiterleiten('../moderation')">Moderationsseite öffnen<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+
+            <div class="infobox">
+                <h1><span id="infobox-beichte-counter">0</span>🔥</h1>
+                <p style="text-align: center; margin-top: 0;">Beichten insgesamt</p>
+            </div>
+
+            <div class="infobox">
+                <h5>Anonym</h5>
+                <p>Nur die Beichte und der selbst angegebene Autor wird abgespeichert, mehr nicht 😎.</p>
+            </div>
+
+            <div class="infobox">
+                <h5>Fragen</h5>
+
+                <a onclick="">Chatte mit dem Abizeitungskomitee<img class="cta-link-img" src="../images/cta-link.svg"></a>
+            </div>
+
+            
+        </div>
+    </div>
+
+</div>
+
+<div style="height: 100px;"></div>
+
+<!--  ///////////////////  FOOTER LIGHT  ///////////////////  -->
+<div id="footer"></div>
+<script src="../javascript/footer/footer-light.js"></script>
+<script>loadFoot();</script>
+
+</body>
+</html>

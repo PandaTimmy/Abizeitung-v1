@@ -1,0 +1,273 @@
+body {
+    background-repeat: repeat-y;
+    //background-image: url("../images/crush\ count\ gradient.png");
+    //background-image: url("../images/25F213F3-0205-45E4-9983-8AAD4C8833BE.jpeg");
+    margin: 0;
+    background-color: black;
+    background-position: center top;
+    user-select: none;
+    //filter: blur(2px);
+    // -webkit-filter: blur(2px);
+    // backdrop-filter: blur(2px);
+    
+    //-webkit-backdrop-filter: blur(10px); /* Add this line first, it fixes blur for Safari*/
+    //backdrop-filter: blur(10px) ;  /* This line activates blur*/
+    color: rgb(0, 0, 0);
+    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.5);
+
+
+    @media screen and (min-width: 1000px) {
+        background-size: 100%;
+    }
+    @media screen and (max-width: 1000px) {
+        background-size: 1000px;
+    }
+
+
+    div {
+        filter: none;
+    }
+}
+
+
+
+h1 {
+    margin: 0 0 0px 0;
+    font-family: 'Poluxxie';
+    font-size: 92px;
+
+    @media screen and (max-width: 800px) {
+        font-size: 72px;
+    }
+}
+h2 {
+    font-size: 40px;
+    font-family: 'Poluxxie';
+    font-weight: 700;
+}    
+h4 {
+    margin: 0;
+    font-weight: 400;
+}
+p {
+    width: 60vw;
+    max-width: 700px;
+}
+
+.main {
+    margin: 0px 13vw 0 13vw;
+
+    @media screen and (max-width: 600px) {
+        margin: 0px 32px 0 32px;
+    }
+}
+
+.rank {
+    margin: 0 auto 50px auto;
+    text-align: center;
+    div {
+        display: inline-block;
+    }
+
+    .rank-rechts {
+
+        margin-left: 72px;
+
+        h3 {
+            font-size: 34px;
+            margin: 0 0 7px 0;
+        }
+        h4 {
+            font-size: 21px;
+            margin: 0;
+        }
+
+        @media screen and (max-width: 800px) {
+            margin-left: 25px;
+
+            h3 {
+                font-size: 22px;
+                margin: 0 0 7px 0;
+            }
+            h4 {
+                font-size: 16px;
+                margin: 0;
+            }
+    
+        }
+
+        
+    }
+
+    .rank-zahl {
+        font-size: 81px;
+        font-weight: 500;
+        text-align: right;
+        @media screen and (max-width: 800px) {
+
+            font-size: 64px;
+    
+        }
+        
+
+    }
+
+}
+
+
+select {
+    border: 1px solid #0000001c ;
+    backdrop-filter: blur(30px);
+    background-color: #ffffff1e;
+    color: rgb(0, 0, 0);
+    box-sizing: border-box;
+    height: 40px;
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
+    appearance: none;
+    margin: 0 0 0px auto;
+    width: 150px;
+    border-radius: 20px;
+    text-align-last: center;
+    font-size: 16px;
+    display: block;
+    background-color: white;
+    margin-right: 30px;
+    transform: translateY(-80px);
+    
+    @media screen and (max-width: 1000px) {
+        transform: translateY(0px);
+        margin: 0 auto 60px 0;
+    }
+}
+
+
+.name {
+    overflow: hidden;
+    border: 1px solid #0000001c ;
+    backdrop-filter: blur(5px);
+    background-color: #ffffff1e;
+    color: #000000af;
+    display: block;
+    padding: 8px;
+    height: 41px;
+    //width: 100%;
+    border-radius: 20px;
+    font-size: 18px;
+    transition: transform 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55), background-color 0.1s ease-in-out;
+    margin: 8px;
+    box-sizing: border-box;
+    background-color: white;
+
+
+    // &:hover {
+    //     background-color: #ffffff31;
+    //     transform: scale(1.05);
+    //     transform-origin: center center;
+    // }
+
+    &.selected {
+        background-color: #ffffff42;
+        border-color: #2a2a2aaf;
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+    }
+
+    input {
+        margin-right: 10px;
+    }
+}
+
+.namen {
+    padding-left: 0;
+    padding-right: 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    
+
+    @media screen and (max-width: 600px) {
+
+        grid-template-columns: 100%;
+
+    }
+
+    @media screen and (min-width: 900px) {
+        grid-template-columns: 33% 34% 33%;
+    }
+
+    @media screen and (min-width: 1200px) {
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+
+    @media screen and (min-width: 1500px) {
+        grid-template-columns: 20% 20% 20% 20% 20%;
+    }
+}
+
+.heart {
+    position: absolute;
+    width: 30vw;
+    right: 0;
+    margin-right: 10vw;
+    z-index: -10;
+    max-width: 250px;
+    opacity: .7;
+
+    @media screen and (max-width: 900px) {
+        opacity: .5;
+    }
+}
+
+
+
+.kachel-top25 {
+    display: grid; grid-template-columns: 30% 70%;
+
+    @media screen and (min-width: 700px) {
+        display: grid; grid-template-columns: 40% 60%;
+    }
+
+    @media screen and (min-width: 1400px) {
+        display: grid; grid-template-columns: 45% 55%;
+    }
+
+    h2 {
+        text-align: right;
+        margin: 0 15px 0 0;
+        font-size: 64px;
+        font-family: 'Poluxxie';
+        line-height: 64px;
+    }
+    div {
+        h3 {
+            font-family: 'Poluxxie';
+            font-size: 32px;
+            margin: 0 0 0 15px;
+        }
+        h4 {
+            font-size: 18px;
+            margin: 0 0 0 15px;
+        }
+    }
+}
+
+.bestenlisteTop25Grid {
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 50px;
+
+    @media screen and (min-width: 1300px) {
+        grid-template-columns: 50% 50%;
+    }
+
+    @media screen and (min-width: 1800px) {
+        grid-template-columns: 33% 33% 33%;
+    }
+}
+
+a {
+    &:hover {
+        text-decoration: underline;
+    }
+}

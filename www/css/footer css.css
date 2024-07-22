@@ -1,0 +1,60 @@
+.footer {
+  width: 100%;
+  background-color: #F5F5F7;
+  padding: 40px 40px 40px 40px;
+  box-sizing: border-box;
+}
+.footer.dark {
+  background-color: #000000;
+  margin-top: 0px;
+}
+.footer .footer-text {
+  margin-top: 10px;
+  color: #000001;
+  font-family: Helvetica Neue;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+.footer .footer-text.dark {
+  color: #ffffff;
+  opacity: 0.8;
+}
+.footer .footer-links {
+  display: inline;
+  margin-top: 10px;
+  color: #000001;
+  font-family: Helvetica Neue;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+@media (max-width: 800px) {
+  .footer .footer-links {
+    display: block;
+  }
+}
+.footer .footer-links .footer-link-space {
+  margin: 0 15px 0 15px;
+  display: inline;
+}
+@media (max-width: 800px) {
+  .footer .footer-links .footer-link-space {
+    display: none;
+  }
+}
+.footer .footer-links a {
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .footer .footer-links a {
+    display: block;
+    margin-top: 5px;
+  }
+}
+.footer .footer-links.dark {
+  color: #ffffff;
+  opacity: 0.8;
+}/*# sourceMappingURL=footer css.css.map */

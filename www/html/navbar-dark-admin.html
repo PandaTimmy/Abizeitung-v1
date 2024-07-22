@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="../css/navbar css.css">
+<link rel="stylesheet" href="../css/footer css.css">
+
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/weiterleiten.js"></script>
+
+<div class="navbar">
+
+    <div class="navbarcontainer">
+        <img src="../images/logo-dark.png" class="navbar-logo" onclick="weiterleiten('../startseite')">
+
+        <div onclick="weiterleiten('../steckbriefe-einstellungen')">Steckbriefe</div>
+        <div onclick="weiterleiten('../zitate-moderieren')">Zitate</div>
+        <div onclick="weiterleiten('../beichten-moderieren')">Beichten</div>
+        <div onclick="weiterleiten('../storys-moderieren')">Storys</div>
+        <div onclick="weiterleiten('../umfragen')">Umfragen</div>
+        <div onclick="weiterleiten('../rankings')">Rankings</div>
+        <div onclick="weiterleiten('../abstimmungen')">Abstimmungen</div>
+        <!-- <div onclick="weiterleiten('../crush-count')">Crush Count</div> -->
+
+        <img src="../images/navbar-profile-dark.svg" class="navbar-profile" onclick="weiterleiten('../konto')">
+    </div>
+
+    <div style="width: 100%; font-size: 14px; color: rgba(255, 255, 255, 0.8);  padding: 25px 0 25px 0; text-align: center; border: 1px solid rgba(255, 255, 255, 0.095); border-width: 1px 0 1px 0;">Moderationsmodus an<br><a style="color: dodgerblue; cursor: pointer;" onclick="weiterleiten(modusWechselURL)">Deaktivieren</a></div>
+    
+</div>
+
+<div class="navbar-mobile" id="navbar-mobile">
+    <img src="../images/logo-dark.png" class="navbar-logo-mobile" onclick="weiterleiten('../startseite')">
+
+    <div style="width: 100%; position: absolute; font-size: 12px; color: rgba(255, 255, 255, 0.8);  padding: 17px 0 15px 0; text-align: center;">Moderationsmodus an / <a style="color: dodgerblue; cursor: pointer; box-sizing: border-box;" onclick="weiterleiten(modusWechselURL)"> Deaktivieren</a></div>
+
+    <div class="navbar-mobile-open" id="navbar-mobile-open">
+        <img src="../images/navbar-mobile-open-dark.svg">
+    </div>
+
+
+
+    <div class="navbar-mobile-close" id="navbar-mobile-close" onclick="toggleNavbarMobile()">
+        <img src="../images/navbar-mobile-close-dark.svg">
+    </div>
+
+
+
+    <ul>
+        <li id="navbar-mobile-element-1" onclick="weiterleiten('../steckbriefe-einstellungen')">
+            Steckbriefe
+        </li>
+        <li id="navbar-mobile-element-2" onclick="weiterleiten('../zitate-moderieren')">
+            Zitate
+        </li>
+        <li id="navbar-mobile-element-3" onclick="weiterleiten('../beichten-moderieren')">
+            Beichten
+        </li>
+        <li id="navbar-mobile-element-4" onclick="weiterleiten('../storys-moderieren')">
+            Storys
+        </li>
+        <li id="navbar-mobile-element-5" onclick="weiterleiten('../umfragen')">
+            Umfragen
+        </li>
+        <li id="navbar-mobile-element-6" onclick="weiterleiten('../rankings')">
+            Rankings
+        </li>
+        <li id="navbar-mobile-element-7" onclick="weiterleiten('../abstimmungen')">
+            Abstimmungen
+        </li>
+        <!-- <li id="navbar-mobile-element-8" onclick="weiterleiten('../crush-count')">
+            Crush Count
+        </li> -->
+        <li id="navbar-mobile-element-8" onclick="weiterleiten('../konto')">
+            Konto
+        </li>
+        
+    </ul>
+
+
+    
+</div>

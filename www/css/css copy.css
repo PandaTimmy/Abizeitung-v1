@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  font-family: "Inter";
+  margin: 0px;
+}
+
+/*
+div {
+    border: 0.1px solid rgba(0, 0, 0, 0.152);
+}
+li {
+    border: 0.1px solid rgba(0, 0, 0, 0.145);
+
+}
+*/
+.divHideOnIpad {
+  display: block;
+}
+@media screen and (min-width: 768px) {
+  .divHideOnIpad {
+    display: none;
+  }
+}
+
+.textScaleWithWebsite1 {
+  font-size: 2.5vw;
+}
+@media screen and (max-width: 768px) {
+  .textScaleWithWebsite1 {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .textScaleWithWebsite1 {
+    font-size: 26px;
+  }
+}
+
+.cropnavbar {
+  background-color: red;
+  width: 100vw;
+  position: absolute;
+  transition: width 0.2s ease-in-out;
+}
+.cropnavbar.open {
+  width: 100vw;
+}
+@media screen and (min-width: 768px) {
+  .cropnavbar.open {
+    width: 400px;
+  }
+}
+.cropnavbar.close {
+  width: 0vw;
+}
+@media screen and (min-width: 768px) {
+  .cropnavbar.close {
+    width: 400px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .cropnavbar {
+    width: 400px;
+    position: relative;
+  }
+}
+.cropnavbar .navbar {
+  width: 100vw;
+  transition: width 0s ease-in-out;
+}
+@media screen and (min-width: 768px) {
+  .cropnavbar .navbar {
+    width: 400px;
+    position: relative;
+  }
+}
+
+.main {
+  max-height: 10000px;
+}/*# sourceMappingURL=css copy.css.map */

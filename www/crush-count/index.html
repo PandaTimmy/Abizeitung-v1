@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <title>Abizeitungsapp</title>
+
+    <link rel="stylesheet" href="css-cc.css">
+
+    <link rel="stylesheet" href="../css/navbar css.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+
+    <script src="../javascript/crush-laden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/bestenlisteCC.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../fonts/poluxxie.ttf">
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+        function bodyReady() {
+            crushLaden(getCookie("login"));
+            bestenListeCC(getCookie("login"));
+        }
+    </script>
+
+    <script>
+
+        function filterUpdate() {
+
+            if (document.getElementById("filter").value == "alle") {
+                var elements = document.querySelectorAll(".f, .m"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "block";
+                });
+            }
+            if (document.getElementById("filter").value == "mädchen") {
+                var elements = document.querySelectorAll(".f"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "block";
+                });
+
+                var elements = document.querySelectorAll(".m"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "none";
+                });
+            }
+            if (document.getElementById("filter").value == "jungs") {
+                var elements = document.querySelectorAll(".f"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "none";
+                });
+
+                var elements = document.querySelectorAll(".m"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "block";
+                });
+            }
+            if (document.getElementById("filter").value == "selected") {
+                var elements = document.querySelectorAll(".name"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "none";
+                });
+
+                var elements = document.querySelectorAll(".selected"); // Nur Mädchen
+
+                elements.forEach(function(element) {
+                    element.style.display = "block";
+                });
+            }
+        }
+
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+
+
+<div style="margin-top: 50px; width: 100%; background-color: rgb(255, 58, 58); height: 45px; font-size: 15px; padding: 13px; box-sizing: border-box; text-align: center; color: white; font-weight: 700;">Experimentell</div>
+
+
+<div style="height: 15vh;"></div>
+
+
+<div class="main">
+
+    <img class="heart" src="../images/image.png">
+
+
+<p>Eroberer der Herzen</p>
+<h1>Crush Count</h1>
+
+<p>Der Crush Count findet die Person heraus, auf die die meisten Leute einen Crush hatten. Es bleibt aber Geheim, wer auf diese Personen einen crush hatten. Es wird nur gezeigt, welche Personen auf der Spitze stehen.</p>
+
+
+<div style="height: 15vh;"></div>
+
+<div style="padding: 30px; background-color: rgb(248, 248, 248);">
+    <h1 style="font-size: 46px;">Bestenliste</h1>
+    <h4>Top 25</h4>
+    <div style="height: 60px;"></div>
+    
+    
+    <div id="rank" class="bestenlisteTop25Grid"></div>
+</div>
+
+
+
+<div style="height: 10vh;"></div>
+
+<div style="padding: 30px; background-color: rgb(248, 248, 248);">
+
+<h1 style="font-size: 46px; margin-bottom: 3px;">Personen Auswählen</h1>
+<h4 style="max-width: 500px;">Wähle alle Personen aus, auf die du mal einen Crush hast oder hattest. Wie alles andere wieder anonym.</h4>
+
+<div style="height: 40px;"></div>
+
+<select name="filter" id="filter" onchange="filterUpdate()">
+    <option value="alle" selected disabled hidden>Filter</option>
+    <option value="alle">Alle</option>
+    <option value="mädchen">Nur Mädchen</option>
+    <option value="jungs">Nur Jungs</option>
+</select>
+
+
+<div class="namen" id="crush-auswahl"></div>
+
+</div>
+
+<div style="height: 15vh;"></div>
+
+
+
+
+
+</div>
+
+
+<!-- <div style="height: 50vh;"></div> -->
+
+<!-- <div style="height: 100vh; background: linear-gradient(to bottom, transparent 0%, rgb(255, 255, 255) 100%); position: absolute; width: 100%; transform: translateY(-100vh);"></div> -->
+
+
+
+
+<div class="footer">
+
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>

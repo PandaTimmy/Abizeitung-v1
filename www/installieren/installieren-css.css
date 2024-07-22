@@ -1,0 +1,132 @@
+@import url("https://fonts.cdnfonts.com/css/helvetica-neue-5");
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+body::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+body::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body {
+  margin: 0px;
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  margin: 5vh auto 5vh auto;
+  display: block;
+  text-align: center;
+}
+
+.app {
+  width: 50vw;
+  max-width: 200px;
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.2941176471);
+  border-radius: 25%;
+  margin: 15vh auto 0 auto;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+}
+
+button {
+  display: block;
+  margin: 20px auto 20px auto;
+  background-color: black;
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 20px;
+  font-size: 16px;
+  width: 200px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.other {
+  border: 0px solid rgb(102, 102, 102);
+  color: rgb(102, 102, 102);
+  width: 300px;
+  font-size: 12px;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.teilen {
+  border-radius: 50%;
+  box-shadow: 0 0 50px 5px rgba(255, 255, 255, 0.3019607843);
+  width: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+}
+
+h4 {
+  color: white;
+  margin: 80px auto 30px auto;
+  display: block;
+  text-align: center;
+  font-weight: 500;
+}
+
+.home {
+  border-radius: 30px;
+  box-shadow: 0 0 50px 0px rgba(255, 255, 255, 0.3019607843);
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+}
+
+.logo {
+  width: 50vw;
+  max-width: 200px;
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.2941176471);
+  border-radius: 25%;
+  margin: 0 auto 0 auto;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+}
+
+.other2 {
+  border: 0px solid rgb(102, 102, 102);
+  color: rgb(102, 102, 102);
+  width: 300px;
+  margin-top: 100px;
+  font-size: 12px;
+}
+
+.teileHomeMacOS {
+  border-radius: 30px;
+  box-shadow: 0 0 50px 0px rgba(255, 255, 255, 0.3019607843);
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+}/*# sourceMappingURL=installieren-css.css.map */

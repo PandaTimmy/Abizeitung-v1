@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abizeitung</title>
+    <link rel="stylesheet" href="installieren-css.css">
+    <script src="../javascript/weiterleiten.js"></script>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../images/logo_1024x1024.png">
+    <link rel="apple-touch-startup-image" href="../images/ati_dark.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script>
+	    function isRunningStandalone() {
+				return (window.matchMedia('(display-mode: standalone)').matches);
+			}
+			if (isRunningStandalone()) {
+				weiterleiten('../startseite');
+			}
+
+
+        function install() {
+            document.getElementById("cta-1").style.height = "0px";
+            document.getElementById("cta-1").style.opacity = 0;
+
+            const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+            if (isiOS && isSafari) {
+                document.getElementById("install-ios").style.opacity = 1;
+                document.getElementById("install-ios").style.maxHeight = "none";
+            } else {
+
+                const isSafari2 = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                const isMacOS2 = /Mac/.test(navigator.userAgent);
+
+                if (isSafari2 && isMacOS2) {
+                    document.getElementById("install-macOS").style.opacity = 1;
+                    document.getElementById("install-macOS").style.maxHeight = "none";
+                } else {
+
+                    const isAndroid = /Android/.test(navigator.userAgent);
+
+                    if (isAndroid) {
+                        document.getElementById("install-android").style.opacity = 1;
+                        document.getElementById("install-android").style.maxHeight = "none";
+                        
+                    } else {
+                        
+                        if (isiOS || isMacOS2) {
+                            document.getElementById("use-safari").style.opacity = 1;
+                            document.getElementById("use-safari").style.maxHeight = "none";
+                        } else {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        function show() {
+
+            document.getElementById("body").style.opacity = 1;
+        }
+
+    </script>
+
+</head>
+<body id="body" style="opacity: 0; transition: all 1s ease-in-out;" onload="show()">
+
+    <img src="../images/logo_1024x1024.png" class="app">
+    <h1>Abizeitungsapp</h1>
+
+    <div id="cta-1" style="transition: all 1s ease-in-out; overflow: hidden; height: 180px;">
+        <button onclick="install()">Installieren</button>
+        <button onclick="weiterleiten('../startseite')" class="other">Oder stattdessen weiter im Browser</button>
+    </div>
+
+    <div id="install-macOS" style="transition: all 1s ease-in-out; opacity: 0; max-height: 0; overflow: hidden;">
+        <h4>Schritt 1: Auf Teilen drücken</h4>
+        <img src="1macOS.png" class="teileHomeMacOS">
+        <h4>Schritt 2: Zum Home Bildschirm</h4>
+        <img src="2macOS.png" class="home">
+        <h4>Schritt 3: Hinzufügen</h4>
+        <img src="3macOS.png" class="home">
+        <h4>Schritt 4: App auf dem Dock starten</h4>
+        <img src="../images/logo_1024x1024.png" class="logo">
+        <button onclick="weiterleiten('../startseite')" class="other2">Oder stattdessen weiter im Browser</button>
+    </div>
+
+    <div id="install-ios" style="transition: all 1s ease-in-out; opacity: 0; max-height: 0; overflow: hidden;">
+        <h4>Schritt 1: Auf Teilen drücken</h4>
+        <img src="1iOS.jpg" class="teilen">
+        <h4>Schritt 2: Zum Home Bildschirm</h4>
+        <img src="2iOS.png" class="home">
+        <h4>Schritt 3: Hinzufügen</h4>
+        <img src="3iOS.png" class="home">
+        <h4>Schritt 4: App auf dem Startbildschirm starten</h4>
+        <img src="../images/logo_1024x1024.png" class="logo">
+        <button onclick="weiterleiten('../startseite')" class="other2">Oder stattdessen weiter im Browser</button>
+    </div>
+    
+    <div id="install-android" style="transition: all 1s ease-in-out; opacity: 0; max-height: 0; overflow: hidden;">
+        <h4>Schritt 1: Auf die drei Punkte drücken</h4>
+        <img src="1Android.png" class="teilen">
+        <h4>Schritt 2: Zum Startbildschirm</h4>
+        <img src="2Android.png" class="home">
+        <h4>Schritt 3: Hinzufügen</h4>
+        <img src="3Android.png" class="home">
+        <h4>Schritt 4: App auf dem Startbildschirm starten</h4>
+        <img src="../images/logo_1024x1024.png" class="logo">
+        <button onclick="weiterleiten('../startseite')" class="other2">Oder stattdessen weiter im Browser</button>
+    </div>
+
+    <div id="use-safari" style="transition: all 1s ease-in-out; opacity: 0; max-height: 0; overflow: hidden;">
+        <h4>Schritt 1: Safari verwenden</h4>
+        <img src="safari_macos.png" class="logo">
+        <h4>Schritt 2: Die installation auf Safari starten</h4>
+
+        <button onclick="weiterleiten('../startseite')" class="other2">Oder stattdessen weiter im Browser</button>
+    </div>
+
+
+</body>
+</html>

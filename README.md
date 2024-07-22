@@ -37,5 +37,5 @@ Diese Version ist noch nicht fertig und wird nicht mehr von mir fertig gestellt 
 ## Admin Anmeldedaten
 
 Benutzername: `KlimkeTim` <br>
-Passwort: `Tg1f-b2zDh-3uQ4c-nI5oLa-6vYsGj-7hK8Fb-sH9tEw-0kVuNx-iZ1Py-lM2vJa`
+Passwort: `pTg1f-b2zDh-3uQ4c-nI5oLa-6vYsGj-7hK8Fb-sH9tEw-0kVuNx-iZ1Py-lM2vJa`
 

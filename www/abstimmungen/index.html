@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abizeitungsapp</title>
+    <link rel="stylesheet" href="css-missing.css">
+    <link rel="stylesheet" href="../css/footer css.css">
+    <link rel="stylesheet" href="../css/navbar css.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script src="../javascript/weiterleiten.js"></script>
+    <script src="../javascript/anmelden.js"></script>
+    <script src="../javascript/cookies.js"></script>
+    <script src="../javascript/ausloggen.js"></script>
+    <script src="../javascript/moderationsLinksZeigen.js"></script>
+    <script src="../javascript/zeilenTabelleZählen.js"></script>
+
+
+    <script>
+        if (getCookie("login") == "") {
+            weiterleiten("../anmelden");
+        }
+
+    </script>
+
+</head>
+
+
+
+<body onload="bodyReady()">
+
+
+<!--  ///////////////////  NAVBAR LIGHT  ///////////////////  -->
+<div id="navbar"></div>
+<script src="../javascript/navbar.js"></script>
+<script src="../javascript/navbar/navbar-light.js"></script>
+
+
+
+<div style="height: 100px;"></div>
+
+<div class="main">
+
+    
+
+    <div style="height: 20px;"></div>
+
+    <h3>503 <span class="h3-light"> Service Unavailable 😕</span></h3>
+
+    <div style="height: 20px;"></div>
+
+    <div class="title">
+        <h1>Abstimmungen</h1>
+    </div>
+    <h3>Diese Seite befindet sich noch im Aufbau.</h3>
+    <hr>
+    <p style="line-height: 40px;">❌ Steckbriefe <br>☑️ Beichten <br>☑️ Zitate <br>☑️ Storys<br>❌ Umfragen<br>❌ Rankings<br>❌ Anstimmungen<br>☑️ Croush Count<br></p>
+    <hr>
+
+        <button style="margin-top: 20px;" onclick="weiterleiten('../startseite')">Zurück zur Startseite</button>
+
+
+</div>
+
+
+<div class="footer">
+    
+    <div class="footer-links">
+        <a onclick="weiterleiten('../über')">Über</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../datenschutz')">Datenschutzerklärung</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../cookies')">Verwendung von Cookies</a>
+        <div class="footer-link-space">|</div>
+        <a onclick="weiterleiten('../impressum')">Rechtliche Hinweise</a>
+    </div>
+
+</div>
+
+</body>
+</html>
